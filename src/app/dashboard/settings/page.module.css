@@ -1,0 +1,7 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(16px, 2.2vh, 24px);
+  /* Caps line length so form labels and values stay comfortably scannable. */
+  max-width: 1080px;
+}

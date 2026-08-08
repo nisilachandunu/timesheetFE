@@ -1,0 +1,398 @@
+@keyframes shimmerWave {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(200%);
+  }
+}
+
+@keyframes panelEntrance {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes borderLightRay {
+  0% {
+    left: -30%;
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0.8;
+  }
+  100% {
+    left: 130%;
+    opacity: 0;
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(106, 57, 219, 0.6), 0 0 0 3px var(--color-accent-tint);
+  }
+  50% {
+    box-shadow: 0 0 0 5px rgba(106, 57, 219, 0), 0 0 0 3px var(--color-accent-tint);
+  }
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(14px, 2vh, 20px);
+  /* Fills the shell's content area so the panel below can be capped at the
+     space that is actually on screen. Without a definite height here the
+     grid's own scroller can never know how tall it is allowed to be, and the
+     whole page scrolls instead — two scrollbars for one table. */
+  height: 100%;
+}
+
+/* ==========================================================================
+   Panel
+
+   One container holds the toolbar, the submitted banner, the grid and the
+   keyboard hint. Each is a horizontal band separated by a hairline, so the
+   whole screen reads as a single object rather than a stack of cards.
+   ========================================================================== */
+
+.panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  /* Grows only as far as its content needs, but never past the viewport:
+     the grid inside takes the squeeze and scrolls internally, keeping the
+     toolbar, the totals footer and the hint on screen. */
+  min-height: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--color-surface-container-lowest);
+  border: 1px solid var(--color-hairline);
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.03),
+    0 12px 28px -8px rgba(0, 0, 0, 0.05),
+    0 0 0 1px var(--color-hairline);
+  animation: panelEntrance 500ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+/* Laser light ray sweep across the top edge on load */
+.panel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -30%;
+  width: 28%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-primary),
+    rgba(255, 255, 255, 0.95),
+    var(--color-primary),
+    transparent
+  );
+  z-index: 10;
+  pointer-events: none;
+  animation: borderLightRay 1.4s cubic-bezier(0.4, 0, 0.2, 1) 150ms forwards;
+}
+
+/* --- Header actions --- */
+
+.dirty {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-right: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--color-on-surface-variant);
+}
+
+.dirtyDot {
+  width: 7px;
+  height: 7px;
+  border-radius: var(--radius-full);
+  background: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-accent-tint);
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+/* --- Submitted banner: a band, not a floating alert --- */
+
+.locked {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 10px;
+  padding: 11px 14px;
+  font-size: 0.8125rem;
+  color: var(--color-on-surface-variant);
+  background: var(--color-accent-tint-faint);
+  border-bottom: 1px solid var(--color-hairline);
+}
+
+.lockedIcon {
+  flex-shrink: 0;
+  color: var(--color-accent-text);
+}
+
+.locked > span:first-of-type {
+  flex: 1;
+  min-width: 0;
+}
+
+/* --- Keyboard hint: the panel's closing band --- */
+
+.tip {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 7px;
+  padding: 10px 14px;
+  font-size: 0.75rem;
+  color: var(--color-outline);
+  background: var(--color-surface-container-lowest);
+  border-top: 1px solid var(--color-hairline);
+}
+
+.tipIcon {
+  flex-shrink: 0;
+}
+
+.tip code {
+  padding: 1px 5px;
+  border-radius: 5px;
+  font-family: ui-monospace, "SFMono-Regular", "Consolas", monospace;
+  font-size: 0.6875rem;
+  color: var(--color-on-surface-variant);
+  background: var(--color-surface-container);
+}
+
+/* ==========================================================================
+   Loading Skeleton (High-Fidelity)
+   ========================================================================== */
+
+.skeleton {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--color-surface-container-lowest);
+  border: 1px solid var(--color-hairline);
+  box-shadow: var(--shadow-card);
+}
+
+/* Holographic liquid shimmer wave across the entire skeleton */
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.03) 25%,
+    rgba(106, 57, 219, 0.08) 50%,
+    rgba(255, 255, 255, 0.05) 75%,
+    transparent 100%
+  );
+  animation: shimmerWave 1.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.skeletonToolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px;
+  background: var(--color-surface-container-lowest);
+  border-bottom: 1px solid var(--color-hairline);
+}
+
+.skelNav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.skelBtn {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: var(--color-surface-container-high);
+}
+
+.skelDate {
+  width: 140px;
+  height: 20px;
+  border-radius: 6px;
+  background: var(--color-surface-container-high);
+  margin: 0 4px;
+}
+
+.skelChip {
+  width: 70px;
+  height: 20px;
+  border-radius: 6px;
+  background: var(--color-accent-tint);
+}
+
+.skelTotal {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 130px;
+}
+
+.skelTextSm {
+  width: 90px;
+  height: 10px;
+  border-radius: 4px;
+  background: var(--color-surface-container-high);
+}
+
+.skelTextLg {
+  width: 70px;
+  height: 16px;
+  border-radius: 5px;
+  background: var(--color-surface-container-high);
+}
+
+.skelBar {
+  width: 100%;
+  height: 4px;
+  border-radius: var(--radius-full);
+  background: var(--color-hairline-strong);
+}
+
+.skeletonGrid {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-surface-container-lowest);
+}
+
+.skelHead {
+  display: flex;
+  align-items: center;
+  height: 42px;
+  padding: 0 14px;
+  background: var(--color-surface-container-low);
+  border-bottom: 1px solid var(--color-hairline-strong);
+  gap: 12px;
+}
+
+.skelHeadColTask {
+  width: 220px;
+  height: 12px;
+  border-radius: 4px;
+  background: var(--color-surface-container-highest);
+  flex-shrink: 0;
+}
+
+.skelHeadCol {
+  flex: 1;
+  height: 12px;
+  border-radius: 4px;
+  background: var(--color-surface-container-highest);
+}
+
+.skelGroupRow {
+  display: flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 14px;
+  background: var(--color-accent-tint-faint);
+  border-top: 1px solid var(--color-accent-tint-border);
+  border-bottom: 1px solid var(--color-accent-tint-border);
+  gap: 10px;
+}
+
+.skelGroupIcon {
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  background: var(--color-accent-tint);
+}
+
+.skelGroupTitle {
+  width: 180px;
+  height: 14px;
+  border-radius: 4px;
+  background: var(--color-accent-tint);
+}
+
+.skelGroupTitleSm {
+  width: 120px;
+  height: 14px;
+  border-radius: 4px;
+  background: var(--color-accent-tint);
+}
+
+.skelTaskRow {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 14px;
+  border-bottom: 1px solid var(--color-hairline-faint);
+  gap: 12px;
+}
+
+.skelTaskTitle {
+  width: 180px;
+  height: 14px;
+  margin-left: 24px;
+  border-radius: 4px;
+  background: var(--color-surface-container-high);
+  flex-shrink: 0;
+}
+
+.skelTaskTitleSm {
+  width: 130px;
+  height: 14px;
+  margin-left: 24px;
+  border-radius: 4px;
+  background: var(--color-surface-container-high);
+  flex-shrink: 0;
+}
+
+.skelDayCells {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  gap: 12px;
+}
+
+.skelPill {
+  flex: 1;
+  height: 24px;
+  border-radius: 6px;
+  background: var(--color-surface-container-low);
+  border: 1px solid var(--color-hairline);
+}
+
+@media (max-width: 720px) {
+  .locked {
+    flex-wrap: wrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel,
+  .panel::before,
+  .dirtyDot,
+  .skeleton::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

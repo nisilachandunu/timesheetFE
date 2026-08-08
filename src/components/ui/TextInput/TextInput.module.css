@@ -1,0 +1,111 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.label {
+  font-size: var(--text-label-sm);
+  font-weight: 600;
+  color: var(--color-on-surface-variant);
+}
+
+.required {
+  margin-left: 3px;
+  color: var(--color-error);
+}
+
+.inputWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  width: 100%;
+  padding: clamp(9px, 1.7vh, 12px) var(--space-4);
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-container-lowest);
+  color: var(--color-on-background);
+  font-size: var(--text-body-md);
+  transition:
+    border-color var(--duration-fast) ease,
+    box-shadow var(--duration-fast) ease;
+}
+
+.input::-moz-placeholder {
+  color: var(--color-outline);
+}
+
+.input::placeholder {
+  color: var(--color-outline);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-focus-ring);
+}
+
+.hasLeadingIcon {
+  padding-left: 44px;
+}
+
+.hasTrailingSlot {
+  padding-right: 44px;
+}
+
+.leadingIcon {
+  position: absolute;
+  left: var(--space-3);
+  display: flex;
+  align-items: center;
+  color: var(--color-outline);
+  pointer-events: none;
+}
+
+.trailingSlot {
+  position: absolute;
+  right: var(--space-3);
+  display: flex;
+  align-items: center;
+}
+
+.error {
+  border-color: var(--color-error);
+}
+
+/* The bare browser calendar glyph reads like unstyled default UI next to
+   this app's custom icon set — recolour it to match --color-outline and
+   give it a hover target so it feels like part of the same design system. */
+.input[type="date"]::-webkit-calendar-picker-indicator {
+  width: 18px;
+  height: 18px;
+  padding: 3px;
+  margin-right: -2px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  opacity: 0.55;
+  filter: var(--date-icon-filter, none);
+  -webkit-transition:
+    opacity var(--duration-fast) ease,
+    background-color var(--duration-fast) ease;
+  transition:
+    opacity var(--duration-fast) ease,
+    background-color var(--duration-fast) ease;
+}
+
+.input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+  background-color: var(--color-hairline-faint);
+}
+
+:root[data-theme="dark"] .input[type="date"] {
+  --date-icon-filter: invert(1) brightness(1.4);
+}
+
+.errorText {
+  font-size: var(--text-label-sm);
+  color: var(--color-error);
+}

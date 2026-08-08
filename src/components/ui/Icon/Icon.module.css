@@ -1,0 +1,12 @@
+.icon {
+  /* Overridable by a consuming module (or the `size`/`weight` props, which
+     set these custom properties inline) so icons can scale with the viewport. */
+  --icon-size: 24px;
+  font-size: var(--icon-size);
+  font-variation-settings:
+    "FILL" var(--icon-fill, 0),
+    "wght" var(--icon-weight, 400),
+    "GRAD" 0,
+    "opsz" 24;
+  transition: font-variation-settings var(--duration-base) var(--ease-out-expo);
+}

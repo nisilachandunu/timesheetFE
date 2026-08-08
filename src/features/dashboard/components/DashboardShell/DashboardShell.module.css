@@ -1,0 +1,109 @@
+.shell {
+  display: flex;
+  height: 100vh;
+  height: 100dvh;
+  width: 100%;
+  overflow: hidden;
+  background: var(--color-background);
+}
+
+.main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* --- Theme switch ---
+   Only the mobile top bar carries one; on desktop it sits at the end of the
+   page header's row, where it costs no extra height. */
+
+.topbarToggle {
+  margin-left: auto;
+}
+
+.content {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: clamp(20px, 3vh, 40px) clamp(20px, 3vw, 48px);
+  /* Establishes the containing block for absolutely positioned descendants
+     (e.g. .sr-only text). Without it they resolve against the document and
+     escape this clip, extending the page and producing a second scrollbar. */
+  position: relative;
+
+  /* Slim scrollbar — kept visible (this region genuinely scrolls) but
+     styled so it reads as part of the UI rather than OS chrome. */
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-scrollbar-thumb) transparent;
+}
+
+.content::-webkit-scrollbar {
+  width: 10px;
+}
+
+.content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.content::-webkit-scrollbar-thumb {
+  background: var(--color-scrollbar-thumb);
+  border-radius: var(--radius-full);
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+
+.content::-webkit-scrollbar-thumb:hover {
+  background: var(--color-scrollbar-thumb-hover);
+  background-clip: content-box;
+}
+
+/* --- Mobile top bar --- */
+
+.topbar {
+  display: none;
+  align-items: center;
+  gap: var(--space-3);
+  flex-shrink: 0;
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-surface-container-lowest);
+  border-bottom: 1px solid var(--color-outline-variant);
+}
+
+.menuButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  color: var(--color-on-surface-variant);
+  transition: background-color var(--duration-fast) ease;
+}
+
+.menuButton:hover {
+  background: var(--color-surface-container);
+  color: var(--color-on-background);
+}
+
+.topbarTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 15;
+  background: rgba(11, 8, 28, 0.55);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+@media (max-width: 1023px) {
+  .topbar {
+    display: flex;
+  }
+}

@@ -1,0 +1,50 @@
+.group {
+  display: flex;
+  justify-content: space-between;
+  gap: clamp(6px, 1.4vh, 12px);
+}
+
+.slot {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-height: clamp(44px, 8vh, 60px);
+  min-width: 0;
+  text-align: center;
+  font-size: clamp(1.125rem, 3vh, 1.5rem);
+  font-weight: 700;
+  color: var(--color-on-background);
+  background: var(--color-surface-container-lowest);
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--radius-md);
+  transition:
+    border-color var(--duration-fast) ease,
+    box-shadow var(--duration-fast) ease,
+    background-color var(--duration-fast) ease;
+}
+
+/* Hide number-input spinners so the slot stays a clean square. */
+.slot::-webkit-outer-spin-button,
+.slot::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+          appearance: none;
+  margin: 0;
+}
+
+.slot:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-focus-ring);
+}
+
+.filled {
+  border-color: var(--color-primary);
+  background: var(--color-accent-tint-faint);
+}
+
+.error {
+  border-color: var(--color-error);
+}
+
+.error:focus {
+  box-shadow: 0 0 0 3px rgba(186, 26, 26, 0.15);
+}

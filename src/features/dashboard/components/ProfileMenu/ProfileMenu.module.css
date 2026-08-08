@@ -1,0 +1,189 @@
+@keyframes menuIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.root {
+  position: relative;
+}
+
+/* --- Popover --- */
+
+.menu {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 0;
+  right: 0;
+  z-index: 30;
+  padding: 6px;
+  border-radius: 15px;
+  background: var(--rail-popover);
+  border: 1px solid var(--color-hairline-strong);
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.3),
+    0 24px 50px -16px rgba(0, 0, 0, 0.75);
+  transform-origin: bottom center;
+  animation: menuIn 0.2s var(--ease-out-expo);
+}
+
+.menuHeader {
+  padding: 10px 10px 11px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid var(--rail-border);
+}
+
+.menuName {
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--rail-text);
+}
+
+.menuEmail {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.75rem;
+  color: var(--rail-text-dim);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.menuItem {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 9px 10px;
+  border-radius: 10px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-align: left;
+  color: var(--rail-text-muted);
+  transition:
+    background-color 160ms ease,
+    color 160ms ease;
+}
+
+.menuItem:hover {
+  background: var(--rail-hover);
+  color: var(--rail-text);
+}
+
+.menuIcon {
+  --icon-size: 18px;
+  color: var(--rail-text-dim);
+  transition: color 160ms ease;
+}
+
+.menuItem:hover .menuIcon {
+  color: var(--color-accent-text);
+}
+
+.signOut:hover {
+  background: rgba(255, 107, 107, 0.1);
+  color: #ff9d95;
+}
+
+.signOut:hover .menuIcon {
+  color: #ff9d95;
+}
+
+/* --- Trigger --- */
+
+.trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  border-radius: 12px;
+  text-align: left;
+  background: var(--rail-raised);
+  border: 1px solid var(--rail-border);
+  transition:
+    background-color 220ms var(--ease-out-expo),
+    border-color 220ms var(--ease-out-expo),
+    box-shadow 220ms var(--ease-out-expo);
+}
+
+.trigger:hover,
+.triggerOpen {
+  background: var(--rail-hover);
+  border-color: var(--color-accent-tint-border);
+  box-shadow: 0 8px 20px -12px rgba(0, 0, 0, 0.7);
+}
+
+/* Violet halo ties the avatar to the brand accent. */
+.avatar {
+  box-shadow:
+    0 0 0 2px var(--rail-bg-mid),
+    0 0 0 4px var(--color-accent-tint-border),
+    0 3px 8px -2px rgba(0, 0, 0, 0.5);
+}
+
+.identity {
+  flex: 1;
+  min-width: 0;
+}
+
+.name {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  color: var(--rail-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.role {
+  display: block;
+  margin-top: 1px;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--rail-text-dim);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chevron {
+  --icon-size: 18px;
+  flex-shrink: 0;
+  color: var(--rail-text-dim);
+  transition: transform 260ms var(--ease-out-expo);
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+/* --- Collapsed rail --- */
+
+.collapsedTrigger {
+  justify-content: center;
+  padding: 8px 0;
+  gap: 0;
+}
+
+.collapsedTrigger .identity,
+.collapsedTrigger .chevron {
+  display: none;
+}
+
+/* The rail is far narrower than the menu needs, so pin a readable width. */
+.collapsedMenu {
+  right: auto;
+  left: 0;
+  width: 238px;
+}

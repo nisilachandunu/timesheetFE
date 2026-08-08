@@ -1,0 +1,28 @@
+.button {
+  justify-content: space-between;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-label-sm);
+  font-weight: 600;
+  transition: color var(--duration-base) ease;
+}
+
+.arrow {
+  color: var(--color-on-surface-variant);
+  transition:
+    color var(--duration-base) ease,
+    transform var(--duration-base) var(--ease-out-expo);
+}
+
+.button:hover .label,
+.button:hover .arrow {
+  color: var(--color-accent-text);
+}
+
+.button:hover .arrow {
+  transform: translateX(3px);
+}

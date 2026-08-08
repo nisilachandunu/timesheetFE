@@ -1,0 +1,1266 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {
+    "hyperedges": [
+      {
+        "id": "repo_root_docs_bundle",
+        "label": "Repo Root Documentation Set",
+        "nodes": [
+          "claude_agentsmdreference",
+          "agents_nextjsversion",
+          "readme_nextjs"
+        ],
+        "relation": "participate_in",
+        "confidence": "INFERRED",
+        "confidence_score": 0.75,
+        "source_file": "AGENTS.md"
+      }
+    ]
+  },
+  "nodes": [
+    {
+      "label": "HolidayCalendarPage",
+      "file_type": "code",
+      "source_file": "src/app/dashboard/holiday-calendar/page.tsx",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "src_app_dashboard_holiday_calendar_page_holidaycalendarpage",
+      "community": 12,
+      "norm_label": "holidaycalendarpage"
+    },
+    {
+      "label": "DashboardLayout",
+      "file_type": "code",
+      "source_file": "src/app/dashboard/layout.tsx",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "src_app_dashboard_layout_dashboardlayout",
+      "community": 13,
+      "norm_label": "dashboardlayout"
+    },
+    {
+      "label": "DashboardPage",
+      "file_type": "code",
+      "source_file": "src/app/dashboard/page.tsx",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "src_app_dashboard_page_dashboardpage",
+      "community": 14,
+      "norm_label": "dashboardpage"
+    },
+    {
+      "label": "SettingsPage",
+      "file_type": "code",
+      "source_file": "src/app/dashboard/settings/page.tsx",
+      "source_location": "L10",
+      "_origin": "ast",
+      "id": "src_app_dashboard_settings_page_settingspage",
+      "community": 15,
+      "norm_label": "settingspage"
+    },
+    {
+      "label": "TimesheetPage",
+      "file_type": "code",
+      "source_file": "src/app/dashboard/timesheet/page.tsx",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "src_app_dashboard_timesheet_page_timesheetpage",
+      "community": 16,
+      "norm_label": "timesheetpage"
+    },
+    {
+      "label": "ForgotPasswordPage",
+      "file_type": "code",
+      "source_file": "src/app/forgot-password/page.tsx",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "src_app_forgot_password_page_forgotpasswordpage",
+      "community": 17,
+      "norm_label": "forgotpasswordpage"
+    },
+    {
+      "label": "RootLayout",
+      "file_type": "code",
+      "source_file": "src/app/layout.tsx",
+      "source_location": "L23",
+      "_origin": "ast",
+      "id": "src_app_layout_rootlayout",
+      "community": 18,
+      "norm_label": "rootlayout"
+    },
+    {
+      "label": "Home",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "src_app_page_home",
+      "community": 19,
+      "norm_label": "home"
+    },
+    {
+      "label": "SignInPage",
+      "file_type": "code",
+      "source_file": "src/app/sign-in/page.tsx",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "src_app_sign_in_page_signinpage",
+      "community": 20,
+      "norm_label": "signinpage"
+    },
+    {
+      "label": "AvatarProps",
+      "file_type": "code",
+      "source_file": "src/components/ui/Avatar/Avatar.tsx",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "src_components_ui_avatar_avatar_avatarprops",
+      "community": 22,
+      "norm_label": "avatarprops"
+    },
+    {
+      "label": "Avatar",
+      "file_type": "code",
+      "source_file": "src/components/ui/Avatar/Avatar.tsx",
+      "source_location": "L21",
+      "_origin": "ast",
+      "id": "src_components_ui_avatar_avatar_avatar",
+      "community": 21,
+      "norm_label": "avatar"
+    },
+    {
+      "label": "BadgeVariant",
+      "file_type": "code",
+      "source_file": "src/components/ui/Badge/Badge.tsx",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "src_components_ui_badge_badge_badgevariant",
+      "community": 25,
+      "norm_label": "badgevariant"
+    },
+    {
+      "label": "BadgeProps",
+      "file_type": "code",
+      "source_file": "src/components/ui/Badge/Badge.tsx",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "src_components_ui_badge_badge_badgeprops",
+      "community": 24,
+      "norm_label": "badgeprops"
+    },
+    {
+      "label": "Badge",
+      "file_type": "code",
+      "source_file": "src/components/ui/Badge/Badge.tsx",
+      "source_location": "L15",
+      "_origin": "ast",
+      "id": "src_components_ui_badge_badge_badge",
+      "community": 23,
+      "norm_label": "badge"
+    },
+    {
+      "label": "ButtonVariant",
+      "file_type": "code",
+      "source_file": "src/components/ui/Button/Button.tsx",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "src_components_ui_button_button_buttonvariant",
+      "community": 28,
+      "norm_label": "buttonvariant"
+    },
+    {
+      "label": "ButtonProps",
+      "file_type": "code",
+      "source_file": "src/components/ui/Button/Button.tsx",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "src_components_ui_button_button_buttonprops",
+      "community": 27,
+      "norm_label": "buttonprops"
+    },
+    {
+      "label": "Button",
+      "file_type": "code",
+      "source_file": "src/components/ui/Button/Button.tsx",
+      "source_location": "L15",
+      "_origin": "ast",
+      "id": "src_components_ui_button_button_button",
+      "community": 26,
+      "norm_label": "button"
+    },
+    {
+      "label": "CardProps",
+      "file_type": "code",
+      "source_file": "src/components/ui/Card/Card.tsx",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "src_components_ui_card_card_cardprops",
+      "community": 30,
+      "norm_label": "cardprops"
+    },
+    {
+      "label": "Card",
+      "file_type": "code",
+      "source_file": "src/components/ui/Card/Card.tsx",
+      "source_location": "L18",
+      "_origin": "ast",
+      "id": "src_components_ui_card_card_card",
+      "community": 29,
+      "norm_label": "card"
+    },
+    {
+      "label": "CheckboxProps",
+      "file_type": "code",
+      "source_file": "src/components/ui/Checkbox/Checkbox.tsx",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "src_components_ui_checkbox_checkbox_checkboxprops",
+      "community": 31,
+      "norm_label": "checkboxprops"
+    },
+    {
+      "label": "DetailFieldProps",
+      "file_type": "code",
+      "source_file": "src/components/ui/DetailField/DetailField.tsx",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "src_components_ui_detailfield_detailfield_detailfieldprops",
+      "community": 32,
+      "norm_label": "detailfieldprops"
+    },
+    {
+      "label": "DividerProps",
+      "file_type": "code",
+      "source_file": "src/components/ui/Divider/Divider.tsx",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "src_components_ui_divider_divider_dividerprops",
+      "community": 34,
+      "norm_label": "dividerprops"
+    },
+    {
+      "label": "Divider",
+      "file_type": "code",
+      "source_file": "src/components/ui/Divider/Divider.tsx",
+      "source_location": "L10",
+      "_origin": "ast",
+      "id": "src_components_ui_divider_divider_divider",
+      "community": 33,
+      "norm_label": "divider"
+    },
+    {
+      "label": "IconProps",
+      "file_type": "code",
+      "source_file": "src/components/ui/Icon/Icon.tsx",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "src_components_ui_icon_icon_iconprops",
+      "community": 36,
+      "norm_label": "iconprops"
+    },
+    {
+      "label": "Icon",
+      "file_type": "code",
+      "source_file": "src/components/ui/Icon/Icon.tsx",
+      "source_location": "L20",
+      "_origin": "ast",
+      "id": "src_components_ui_icon_icon_icon",
+      "community": 35,
+      "norm_label": "icon"
+    },
+    {
+      "label": "InteractiveGlowProps",
+      "file_type": "code",
+      "source_file": "src/components/ui/InteractiveGlow/InteractiveGlow.tsx",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "src_components_ui_interactiveglow_interactiveglow_interactiveglowprops",
+      "community": 38,
+      "norm_label": "interactiveglowprops"
+    },
+    {
+      "label": "InteractiveGlow",
+      "file_type": "code",
+      "source_file": "src/components/ui/InteractiveGlow/InteractiveGlow.tsx",
+      "source_location": "L16",
+      "_origin": "ast",
+      "id": "src_components_ui_interactiveglow_interactiveglow_interactiveglow",
+      "community": 37,
+      "norm_label": "interactiveglow"
+    },
+    {
+      "label": "LogoProps",
+      "file_type": "code",
+      "source_file": "src/components/ui/Logo/Logo.tsx",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "src_components_ui_logo_logo_logoprops",
+      "community": 40,
+      "norm_label": "logoprops"
+    },
+    {
+      "label": "Logo",
+      "file_type": "code",
+      "source_file": "src/components/ui/Logo/Logo.tsx",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "src_components_ui_logo_logo_logo",
+      "community": 39,
+      "norm_label": "logo"
+    },
+    {
+      "label": "MicrosoftLogoProps",
+      "file_type": "code",
+      "source_file": "src/components/ui/MicrosoftLogo/MicrosoftLogo.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_components_ui_microsoftlogo_microsoftlogo_microsoftlogoprops",
+      "community": 42,
+      "norm_label": "microsoftlogoprops"
+    },
+    {
+      "label": "MicrosoftLogo",
+      "file_type": "code",
+      "source_file": "src/components/ui/MicrosoftLogo/MicrosoftLogo.tsx",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "src_components_ui_microsoftlogo_microsoftlogo_microsoftlogo",
+      "community": 41,
+      "norm_label": "microsoftlogo"
+    },
+    {
+      "label": "NavItemProps",
+      "file_type": "code",
+      "source_file": "src/components/ui/NavItem/NavItem.tsx",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "src_components_ui_navitem_navitem_navitemprops",
+      "community": 44,
+      "norm_label": "navitemprops"
+    },
+    {
+      "label": "NavItem",
+      "file_type": "code",
+      "source_file": "src/components/ui/NavItem/NavItem.tsx",
+      "source_location": "L16",
+      "_origin": "ast",
+      "id": "src_components_ui_navitem_navitem_navitem",
+      "community": 43,
+      "norm_label": "navitem"
+    },
+    {
+      "label": "OtpInputProps",
+      "file_type": "code",
+      "source_file": "src/components/ui/OtpInput/OtpInput.tsx",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "src_components_ui_otpinput_otpinput_otpinputprops",
+      "community": 45,
+      "norm_label": "otpinputprops"
+    },
+    {
+      "label": "PasswordInputProps",
+      "file_type": "code",
+      "source_file": "src/components/ui/PasswordInput/PasswordInput.tsx",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "src_components_ui_passwordinput_passwordinput_passwordinputprops",
+      "community": 46,
+      "norm_label": "passwordinputprops"
+    },
+    {
+      "label": "SpinnerProps",
+      "file_type": "code",
+      "source_file": "src/components/ui/Spinner/Spinner.tsx",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "src_components_ui_spinner_spinner_spinnerprops",
+      "community": 48,
+      "norm_label": "spinnerprops"
+    },
+    {
+      "label": "Spinner",
+      "file_type": "code",
+      "source_file": "src/components/ui/Spinner/Spinner.tsx",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "src_components_ui_spinner_spinner_spinner",
+      "community": 47,
+      "norm_label": "spinner"
+    },
+    {
+      "label": "TextInputProps",
+      "file_type": "code",
+      "source_file": "src/components/ui/TextInput/TextInput.tsx",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "src_components_ui_textinput_textinput_textinputprops",
+      "community": 49,
+      "norm_label": "textinputprops"
+    },
+    {
+      "label": "TextLinkProps",
+      "file_type": "code",
+      "source_file": "src/components/ui/TextLink/TextLink.tsx",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "src_components_ui_textlink_textlink_textlinkprops",
+      "community": 50,
+      "norm_label": "textlinkprops"
+    },
+    {
+      "label": "AuthLayoutProps",
+      "file_type": "code",
+      "source_file": "src/features/auth/components/AuthLayout/AuthLayout.tsx",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "src_features_auth_components_authlayout_authlayout_authlayoutprops",
+      "community": 52,
+      "norm_label": "authlayoutprops"
+    },
+    {
+      "label": "AuthLayout",
+      "file_type": "code",
+      "source_file": "src/features/auth/components/AuthLayout/AuthLayout.tsx",
+      "source_location": "L10",
+      "_origin": "ast",
+      "id": "src_features_auth_components_authlayout_authlayout_authlayout",
+      "community": 51,
+      "norm_label": "authlayout"
+    },
+    {
+      "label": "BrandingPanel",
+      "file_type": "code",
+      "source_file": "src/features/auth/components/BrandingPanel/BrandingPanel.tsx",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "src_features_auth_components_brandingpanel_brandingpanel_brandingpanel",
+      "community": 53,
+      "norm_label": "brandingpanel"
+    },
+    {
+      "label": "ForgotPasswordFormProps",
+      "file_type": "code",
+      "source_file": "src/features/auth/components/ForgotPasswordForm/ForgotPasswordForm.tsx",
+      "source_location": "L10",
+      "_origin": "ast",
+      "id": "src_features_auth_components_forgotpasswordform_forgotpasswordform_forgotpasswordformprops",
+      "community": 3,
+      "norm_label": "forgotpasswordformprops"
+    },
+    {
+      "label": "ForgotPasswordForm",
+      "file_type": "code",
+      "source_file": "src/features/auth/components/ForgotPasswordForm/ForgotPasswordForm.tsx",
+      "source_location": "L15",
+      "_origin": "ast",
+      "id": "src_features_auth_components_forgotpasswordform_forgotpasswordform_forgotpasswordform",
+      "community": 54,
+      "norm_label": "forgotpasswordform"
+    },
+    {
+      "label": "OtpFormProps",
+      "file_type": "code",
+      "source_file": "src/features/auth/components/OtpForm/OtpForm.tsx",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "src_features_auth_components_otpform_otpform_otpformprops",
+      "community": 55,
+      "norm_label": "otpformprops"
+    },
+    {
+      "label": "OtpFormContainer",
+      "file_type": "code",
+      "source_file": "src/features/auth/components/OtpForm/OtpFormContainer.tsx",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "src_features_auth_components_otpform_otpformcontainer_otpformcontainer",
+      "community": 56,
+      "norm_label": "otpformcontainer"
+    },
+    {
+      "label": "SignInFormProps",
+      "file_type": "code",
+      "source_file": "src/features/auth/components/SignInForm/SignInForm.tsx",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "src_features_auth_components_signinform_signinform_signinformprops",
+      "community": 4,
+      "norm_label": "signinformprops"
+    },
+    {
+      "label": "SsoButtonProps",
+      "file_type": "code",
+      "source_file": "src/features/auth/components/SsoButton/SsoButton.tsx",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "src_features_auth_components_ssobutton_ssobutton_ssobuttonprops",
+      "community": 58,
+      "norm_label": "ssobuttonprops"
+    },
+    {
+      "label": "SsoButton",
+      "file_type": "code",
+      "source_file": "src/features/auth/components/SsoButton/SsoButton.tsx",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "src_features_auth_components_ssobutton_ssobutton_ssobutton",
+      "community": 57,
+      "norm_label": "ssobutton"
+    },
+    {
+      "label": "TrustBadges",
+      "file_type": "code",
+      "source_file": "src/features/auth/components/TrustBadges/TrustBadges.tsx",
+      "source_location": "L10",
+      "_origin": "ast",
+      "id": "src_features_auth_components_trustbadges_trustbadges_trustbadges",
+      "community": 59,
+      "norm_label": "trustbadges"
+    },
+    {
+      "label": "ValuePropList",
+      "file_type": "code",
+      "source_file": "src/features/auth/components/ValuePropList/ValuePropList.tsx",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "src_features_auth_components_valueproplist_valueproplist_valueproplist",
+      "community": 60,
+      "norm_label": "valueproplist"
+    },
+    {
+      "label": "useForgotPasswordForm",
+      "file_type": "code",
+      "source_file": "src/features/auth/hooks/useForgotPasswordForm.ts",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "src_features_auth_hooks_useforgotpasswordform_useforgotpasswordform",
+      "community": 61,
+      "norm_label": "useforgotpasswordform"
+    },
+    {
+      "label": "UseOtpVerificationOptions",
+      "file_type": "code",
+      "source_file": "src/features/auth/hooks/useOtpVerification.ts",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "src_features_auth_hooks_useotpverification_useotpverificationoptions",
+      "community": 63,
+      "norm_label": "useotpverificationoptions"
+    },
+    {
+      "label": "useOtpVerification",
+      "file_type": "code",
+      "source_file": "src/features/auth/hooks/useOtpVerification.ts",
+      "source_location": "L17",
+      "_origin": "ast",
+      "id": "src_features_auth_hooks_useotpverification_useotpverification",
+      "community": 62,
+      "norm_label": "useotpverification"
+    },
+    {
+      "label": "useSignInForm",
+      "file_type": "code",
+      "source_file": "src/features/auth/hooks/useSignInForm.ts",
+      "source_location": "L28",
+      "_origin": "ast",
+      "id": "src_features_auth_hooks_usesigninform_usesigninform",
+      "community": 64,
+      "norm_label": "usesigninform"
+    },
+    {
+      "label": "SignInCredentials",
+      "file_type": "code",
+      "source_file": "src/features/auth/types/index.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_features_auth_types_index_signincredentials",
+      "community": 4,
+      "norm_label": "signincredentials"
+    },
+    {
+      "label": "ForgotPasswordRequest",
+      "file_type": "code",
+      "source_file": "src/features/auth/types/index.ts",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "src_features_auth_types_index_forgotpasswordrequest",
+      "community": 3,
+      "norm_label": "forgotpasswordrequest"
+    },
+    {
+      "label": "ValueProp",
+      "file_type": "code",
+      "source_file": "src/features/auth/types/index.ts",
+      "source_location": "L10",
+      "_origin": "ast",
+      "id": "src_features_auth_types_index_valueprop",
+      "community": 66,
+      "norm_label": "valueprop"
+    },
+    {
+      "label": "TrustBadge",
+      "file_type": "code",
+      "source_file": "src/features/auth/types/index.ts",
+      "source_location": "L15",
+      "_origin": "ast",
+      "id": "src_features_auth_types_index_trustbadge",
+      "community": 65,
+      "norm_label": "trustbadge"
+    },
+    {
+      "label": "validateEmail",
+      "file_type": "code",
+      "source_file": "src/features/auth/validation.ts",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "src_features_auth_validation_validateemail",
+      "community": 67,
+      "norm_label": "validateemail"
+    },
+    {
+      "label": "validatePassword",
+      "file_type": "code",
+      "source_file": "src/features/auth/validation.ts",
+      "source_location": "L19",
+      "_origin": "ast",
+      "id": "src_features_auth_validation_validatepassword",
+      "community": 69,
+      "norm_label": "validatepassword"
+    },
+    {
+      "label": "validateOtp",
+      "file_type": "code",
+      "source_file": "src/features/auth/validation.ts",
+      "source_location": "L27",
+      "_origin": "ast",
+      "id": "src_features_auth_validation_validateotp",
+      "community": 68,
+      "norm_label": "validateotp"
+    },
+    {
+      "label": "DashboardShellProps",
+      "file_type": "code",
+      "source_file": "src/features/dashboard/components/DashboardShell/DashboardShell.tsx",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "src_features_dashboard_components_dashboardshell_dashboardshell_dashboardshellprops",
+      "community": 71,
+      "norm_label": "dashboardshellprops"
+    },
+    {
+      "label": "DashboardShell",
+      "file_type": "code",
+      "source_file": "src/features/dashboard/components/DashboardShell/DashboardShell.tsx",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "src_features_dashboard_components_dashboardshell_dashboardshell_dashboardshell",
+      "community": 70,
+      "norm_label": "dashboardshell"
+    },
+    {
+      "label": "PageHeaderProps",
+      "file_type": "code",
+      "source_file": "src/features/dashboard/components/PageHeader/PageHeader.tsx",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "src_features_dashboard_components_pageheader_pageheader_pageheaderprops",
+      "community": 73,
+      "norm_label": "pageheaderprops"
+    },
+    {
+      "label": "PageHeader",
+      "file_type": "code",
+      "source_file": "src/features/dashboard/components/PageHeader/PageHeader.tsx",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "src_features_dashboard_components_pageheader_pageheader_pageheader",
+      "community": 72,
+      "norm_label": "pageheader"
+    },
+    {
+      "label": "ProfileMenuProps",
+      "file_type": "code",
+      "source_file": "src/features/dashboard/components/ProfileMenu/ProfileMenu.tsx",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "src_features_dashboard_components_profilemenu_profilemenu_profilemenuprops",
+      "community": 2,
+      "norm_label": "profilemenuprops"
+    },
+    {
+      "label": "SidebarProps",
+      "file_type": "code",
+      "source_file": "src/features/dashboard/components/Sidebar/Sidebar.tsx",
+      "source_location": "L10",
+      "_origin": "ast",
+      "id": "src_features_dashboard_components_sidebar_sidebar_sidebarprops",
+      "community": 75,
+      "norm_label": "sidebarprops"
+    },
+    {
+      "label": "Sidebar",
+      "file_type": "code",
+      "source_file": "src/features/dashboard/components/Sidebar/Sidebar.tsx",
+      "source_location": "L16",
+      "_origin": "ast",
+      "id": "src_features_dashboard_components_sidebar_sidebar_sidebar",
+      "community": 74,
+      "norm_label": "sidebar"
+    },
+    {
+      "label": "useSidebarCollapse",
+      "file_type": "code",
+      "source_file": "src/features/dashboard/hooks/useSidebarCollapse.ts",
+      "source_location": "L53",
+      "_origin": "ast",
+      "id": "src_features_dashboard_hooks_usesidebarcollapse_usesidebarcollapse",
+      "community": 76,
+      "norm_label": "usesidebarcollapse"
+    },
+    {
+      "label": "NavLink",
+      "file_type": "code",
+      "source_file": "src/features/dashboard/types.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_features_dashboard_types_navlink",
+      "community": 77,
+      "norm_label": "navlink"
+    },
+    {
+      "label": "UserProfile",
+      "file_type": "code",
+      "source_file": "src/features/dashboard/types.ts",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "src_features_dashboard_types_userprofile",
+      "community": 2,
+      "norm_label": "userprofile"
+    },
+    {
+      "label": "AccountCardProps",
+      "file_type": "code",
+      "source_file": "src/features/settings/components/AccountCard/AccountCard.tsx",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "src_features_settings_components_accountcard_accountcard_accountcardprops",
+      "community": 2,
+      "norm_label": "accountcardprops"
+    },
+    {
+      "label": "AccountCard",
+      "file_type": "code",
+      "source_file": "src/features/settings/components/AccountCard/AccountCard.tsx",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "src_features_settings_components_accountcard_accountcard_accountcard",
+      "community": 78,
+      "norm_label": "accountcard"
+    },
+    {
+      "label": "ChangePasswordCardProps",
+      "file_type": "code",
+      "source_file": "src/features/settings/components/ChangePasswordCard/ChangePasswordCard.tsx",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "src_features_settings_components_changepasswordcard_changepasswordcard_changepasswordcardprops",
+      "community": 5,
+      "norm_label": "changepasswordcardprops"
+    },
+    {
+      "label": "PasswordPolicyPanelProps",
+      "file_type": "code",
+      "source_file": "src/features/settings/components/PasswordPolicyPanel/PasswordPolicyPanel.tsx",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "src_features_settings_components_passwordpolicypanel_passwordpolicypanel_passwordpolicypanelprops",
+      "community": 6,
+      "norm_label": "passwordpolicypanelprops"
+    },
+    {
+      "label": "ProfileHeroProps",
+      "file_type": "code",
+      "source_file": "src/features/settings/components/ProfileHero/ProfileHero.tsx",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "src_features_settings_components_profilehero_profilehero_profileheroprops",
+      "community": 2,
+      "norm_label": "profileheroprops"
+    },
+    {
+      "label": "ProfileHero",
+      "file_type": "code",
+      "source_file": "src/features/settings/components/ProfileHero/ProfileHero.tsx",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "src_features_settings_components_profilehero_profilehero_profilehero",
+      "community": 79,
+      "norm_label": "profilehero"
+    },
+    {
+      "label": "ChangePasswordValues",
+      "file_type": "code",
+      "source_file": "src/features/settings/hooks/useChangePasswordForm.ts",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "src_features_settings_hooks_usechangepasswordform_changepasswordvalues",
+      "community": 5,
+      "norm_label": "changepasswordvalues"
+    },
+    {
+      "label": "useChangePasswordForm",
+      "file_type": "code",
+      "source_file": "src/features/settings/hooks/useChangePasswordForm.ts",
+      "source_location": "L14",
+      "_origin": "ast",
+      "id": "src_features_settings_hooks_usechangepasswordform_usechangepasswordform",
+      "community": 80,
+      "norm_label": "usechangepasswordform"
+    },
+    {
+      "label": "PasswordRule",
+      "file_type": "code",
+      "source_file": "src/features/settings/passwordPolicy.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_features_settings_passwordpolicy_passwordrule",
+      "community": 82,
+      "norm_label": "passwordrule"
+    },
+    {
+      "label": "StrengthLevel",
+      "file_type": "code",
+      "source_file": "src/features/settings/passwordPolicy.ts",
+      "source_location": "L30",
+      "_origin": "ast",
+      "id": "src_features_settings_passwordpolicy_strengthlevel",
+      "community": 84,
+      "norm_label": "strengthlevel"
+    },
+    {
+      "label": "PasswordStrength",
+      "file_type": "code",
+      "source_file": "src/features/settings/passwordPolicy.ts",
+      "source_location": "L32",
+      "_origin": "ast",
+      "id": "src_features_settings_passwordpolicy_passwordstrength",
+      "community": 6,
+      "norm_label": "passwordstrength"
+    },
+    {
+      "label": "scorePassword",
+      "file_type": "code",
+      "source_file": "src/features/settings/passwordPolicy.ts",
+      "source_location": "L51",
+      "_origin": "ast",
+      "id": "src_features_settings_passwordpolicy_scorepassword",
+      "community": 83,
+      "norm_label": "scorepassword"
+    },
+    {
+      "label": "meetsPolicy",
+      "file_type": "code",
+      "source_file": "src/features/settings/passwordPolicy.ts",
+      "source_location": "L67",
+      "_origin": "ast",
+      "id": "src_features_settings_passwordpolicy_meetspolicy",
+      "community": 81,
+      "norm_label": "meetspolicy"
+    },
+    {
+      "label": "UseCountdownResult",
+      "file_type": "code",
+      "source_file": "src/hooks/useCountdown.ts",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "src_hooks_usecountdown_usecountdownresult",
+      "community": 86,
+      "norm_label": "usecountdownresult"
+    },
+    {
+      "label": "useCountdown",
+      "file_type": "code",
+      "source_file": "src/hooks/useCountdown.ts",
+      "source_location": "L29",
+      "_origin": "ast",
+      "id": "src_hooks_usecountdown_usecountdown",
+      "community": 85,
+      "norm_label": "usecountdown"
+    },
+    {
+      "label": "useDismissable",
+      "file_type": "code",
+      "source_file": "src/hooks/useDismissable.ts",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "src_hooks_usedismissable_usedismissable",
+      "community": 87,
+      "norm_label": "usedismissable"
+    },
+    {
+      "label": "Non-Standard Next.js Version Warning",
+      "file_type": "rationale",
+      "source_file": "AGENTS.md",
+      "source_location": "lines 3-7",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "agents_nextjsversion",
+      "community": 1,
+      "norm_label": "non-standard next.js version warning"
+    },
+    {
+      "label": "node_modules/next/dist/docs/",
+      "file_type": "document",
+      "source_file": "AGENTS.md",
+      "source_location": "line 5",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "agents_nextjsdocs",
+      "community": 1,
+      "norm_label": "node_modules/next/dist/docs/"
+    },
+    {
+      "label": "generate-agent-files.js",
+      "file_type": "code",
+      "source_file": "AGENTS.md",
+      "source_location": "line 7",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "agents_generateagentfiles",
+      "community": 1,
+      "norm_label": "generate-agent-files.js"
+    },
+    {
+      "label": "CLAUDE.md @AGENTS.md Import",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "line 1",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "claude_agentsmdreference",
+      "community": 1,
+      "norm_label": "claude.md @agents.md import"
+    },
+    {
+      "label": "Next.js Project (create-next-app)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "line 1",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "readme_nextjs",
+      "community": 0,
+      "norm_label": "next.js project (create-next-app)"
+    },
+    {
+      "label": "create-next-app",
+      "file_type": "concept",
+      "source_file": "README.md",
+      "source_location": "line 1",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "readme_createnextapp",
+      "community": 0,
+      "norm_label": "create-next-app"
+    },
+    {
+      "label": "Geist Font via next/font",
+      "file_type": "concept",
+      "source_file": "README.md",
+      "source_location": "line 21",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "readme_geistfont",
+      "community": 0,
+      "norm_label": "geist font via next/font"
+    },
+    {
+      "label": "Vercel Deployment Platform",
+      "file_type": "concept",
+      "source_file": "README.md",
+      "source_location": "lines 32-36",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "readme_vercel",
+      "community": 0,
+      "norm_label": "vercel deployment platform"
+    },
+    {
+      "label": "app/page.tsx",
+      "file_type": "code",
+      "source_file": "README.md",
+      "source_location": "line 19",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "readme_apppagetsx",
+      "community": 0,
+      "norm_label": "app/page.tsx"
+    },
+    {
+      "label": "File Icon (file.svg)",
+      "file_type": "image",
+      "source_file": "public/file.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "public_file_icon",
+      "community": 7,
+      "norm_label": "file icon (file.svg)"
+    },
+    {
+      "label": "Globe Icon (globe.svg)",
+      "file_type": "image",
+      "source_file": "public/globe.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "public_globe_icon",
+      "community": 8,
+      "norm_label": "globe icon (globe.svg)"
+    },
+    {
+      "label": "Next.js Logo Icon (next.svg)",
+      "file_type": "image",
+      "source_file": "public/next.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "public_next_icon",
+      "community": 9,
+      "norm_label": "next.js logo icon (next.svg)"
+    },
+    {
+      "label": "Vercel Logo Icon (vercel.svg)",
+      "file_type": "image",
+      "source_file": "public/vercel.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "public_vercel_icon",
+      "community": 10,
+      "norm_label": "vercel logo icon (vercel.svg)"
+    },
+    {
+      "label": "Window Icon (window.svg)",
+      "file_type": "image",
+      "source_file": "public/window.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "public_window_icon",
+      "community": 11,
+      "norm_label": "window icon (window.svg)"
+    }
+  ],
+  "links": [
+    {
+      "relation": "references",
+      "context": "field",
+      "confidence": "EXTRACTED",
+      "source_file": "src/features/auth/components/ForgotPasswordForm/ForgotPasswordForm.tsx",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_features_auth_components_forgotpasswordform_forgotpasswordform_forgotpasswordformprops",
+      "target": "src_features_auth_types_index_forgotpasswordrequest",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "field",
+      "confidence": "EXTRACTED",
+      "source_file": "src/features/auth/components/SignInForm/SignInForm.tsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_features_auth_components_signinform_signinform_signinformprops",
+      "target": "src_features_auth_types_index_signincredentials",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "field",
+      "confidence": "EXTRACTED",
+      "source_file": "src/features/dashboard/components/ProfileMenu/ProfileMenu.tsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_features_dashboard_components_profilemenu_profilemenu_profilemenuprops",
+      "target": "src_features_dashboard_types_userprofile",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "field",
+      "confidence": "EXTRACTED",
+      "source_file": "src/features/settings/components/AccountCard/AccountCard.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_features_settings_components_accountcard_accountcard_accountcardprops",
+      "target": "src_features_dashboard_types_userprofile",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "field",
+      "confidence": "EXTRACTED",
+      "source_file": "src/features/settings/components/ProfileHero/ProfileHero.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_features_settings_components_profilehero_profilehero_profileheroprops",
+      "target": "src_features_dashboard_types_userprofile",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "field",
+      "confidence": "EXTRACTED",
+      "source_file": "src/features/settings/components/ChangePasswordCard/ChangePasswordCard.tsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_features_settings_components_changepasswordcard_changepasswordcard_changepasswordcardprops",
+      "target": "src_features_settings_hooks_usechangepasswordform_changepasswordvalues",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "field",
+      "confidence": "EXTRACTED",
+      "source_file": "src/features/settings/components/PasswordPolicyPanel/PasswordPolicyPanel.tsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_features_settings_components_passwordpolicypanel_passwordpolicypanel_passwordpolicypanelprops",
+      "target": "src_features_settings_passwordpolicy_passwordstrength",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "AGENTS.md",
+      "source_location": "line 7",
+      "weight": 1.0,
+      "source": "agents_nextjsversion",
+      "target": "agents_generateagentfiles"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "AGENTS.md",
+      "source_location": "line 5",
+      "weight": 1.0,
+      "source": "agents_nextjsversion",
+      "target": "agents_nextjsdocs"
+    },
+    {
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.65,
+      "source_file": "AGENTS.md",
+      "source_location": null,
+      "weight": 0.65,
+      "source": "agents_nextjsversion",
+      "target": "readme_nextjs"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "CLAUDE.md",
+      "source_location": "line 1",
+      "weight": 1.0,
+      "source": "claude_agentsmdreference",
+      "target": "agents_nextjsversion"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "line 19",
+      "weight": 1.0,
+      "source": "readme_nextjs",
+      "target": "readme_apppagetsx"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "line 1",
+      "weight": 1.0,
+      "source": "readme_nextjs",
+      "target": "readme_createnextapp"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "line 21",
+      "weight": 1.0,
+      "source": "readme_nextjs",
+      "target": "readme_geistfont"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "lines 32-36",
+      "weight": 1.0,
+      "source": "readme_nextjs",
+      "target": "readme_vercel"
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "repo_root_docs_bundle",
+      "label": "Repo Root Documentation Set",
+      "nodes": [
+        "claude_agentsmdreference",
+        "agents_nextjsversion",
+        "readme_nextjs"
+      ],
+      "relation": "participate_in",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "AGENTS.md"
+    }
+  ]
+}

@@ -1,0 +1,232 @@
+@keyframes menuIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.root {
+  position: relative;
+}
+
+/* --- Trigger --- */
+
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 8px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-on-surface-variant);
+  background: var(--color-surface-container-lowest);
+  border: 1px solid var(--color-hairline);
+  transition:
+    background-color var(--duration-fast) ease,
+    border-color var(--duration-fast) ease,
+    color var(--duration-fast) ease;
+}
+
+.trigger:hover,
+.triggerOpen {
+  color: var(--color-on-background);
+  border-color: var(--color-hairline-strong);
+  background: var(--color-surface-container-low);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 17px;
+  height: 17px;
+  padding: 0 5px;
+  border-radius: 5px;
+  font-size: 0.625rem;
+  font-weight: 700;
+  color: var(--color-on-primary);
+  background: var(--color-primary);
+}
+
+/* --- Popover --- */
+
+.menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 40;
+  width: 288px;
+  padding: 12px;
+  border-radius: 14px;
+  background: var(--color-surface-container-lowest);
+  border: 1px solid var(--color-hairline-strong);
+  box-shadow: var(--shadow-panel);
+  transform-origin: top right;
+  animation: menuIn 0.16s var(--ease-out-expo);
+}
+
+.menuHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.menuTitle {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--color-on-background);
+}
+
+.reset {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-accent-text);
+  border-radius: var(--radius-sm);
+}
+
+.reset:disabled {
+  color: var(--color-outline);
+  cursor: default;
+}
+
+.hint {
+  margin: 6px 0 10px;
+  font-size: 0.6875rem;
+  line-height: 1.45;
+  color: var(--color-on-surface-variant);
+}
+
+/* --- Column list --- */
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  list-style: none;
+}
+
+/* One entry in the column list — the day block also nests its own toggles. */
+.group {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  padding: 2px 2px 2px 6px;
+  transition: background-color 140ms ease;
+}
+
+.row:hover {
+  background: var(--color-surface-container-low);
+}
+
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  flex: 1;
+  min-width: 0;
+  padding: 5px 0;
+  font-size: 0.8125rem;
+  cursor: pointer;
+}
+
+.checkbox {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  accent-color: var(--color-primary);
+  cursor: pointer;
+}
+
+.checkbox:disabled {
+  cursor: default;
+}
+
+.name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--color-on-background);
+}
+
+.pinned {
+  flex-shrink: 0;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-outline);
+}
+
+.moves {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+/* Up/down read as left/right once the list is understood as column order —
+   the aria-labels say left/right so assistive tech is unambiguous. */
+.move {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  color: var(--color-on-surface-variant);
+  transition:
+    background-color 140ms ease,
+    color 140ms ease;
+}
+
+.move:hover:not(:disabled) {
+  background: var(--color-accent-tint);
+  color: var(--color-accent-text);
+}
+
+.move:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+/* --- Nested day toggles --- */
+
+.days {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  margin: 2px 0 6px;
+  padding: 8px 10px;
+  border-radius: 9px;
+  background: var(--color-surface-container-low);
+  border: 1px solid var(--color-hairline-faint);
+}
+
+.day {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: var(--color-on-surface-variant);
+  cursor: pointer;
+}
+
+.quick {
+  flex-basis: 100%;
+  margin-top: 2px;
+  text-align: left;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--color-accent-text);
+}
