@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, type MouseEvent, type ReactNode } from "react";
-import styles from "./InteractiveGlow.module.css";
+import { cn } from "@/lib/cn";
 
 export interface InteractiveGlowProps {
   children: ReactNode;
@@ -31,9 +31,21 @@ export function InteractiveGlow({ children, className }: InteractiveGlowProps) {
     <div
       ref={areaRef}
       onMouseMove={handleMouseMove}
-      className={`${styles.area} ${className ?? ""}`}
+      className={cn("group relative isolate", className)}
     >
-      <div ref={glowRef} className={styles.glow} aria-hidden="true" />
+      <div
+        ref={glowRef}
+        className={cn(
+          "absolute w-[800px] h-[800px] rounded-full z-[1] pointer-events-none",
+          "bg-[radial-gradient(circle,rgba(132,85,239,0.2)_0%,transparent_60%)]",
+          "-translate-x-1/2 -translate-y-1/2 mix-blend-screen",
+          "opacity-0 transition-opacity duration-[0.4s] ease-[ease]",
+          "group-hover:opacity-100",
+          // Touch devices have no meaningful cursor position to follow.
+          "[@media(hover:none)]:hidden",
+        )}
+        aria-hidden="true"
+      />
       {children}
     </div>
   );

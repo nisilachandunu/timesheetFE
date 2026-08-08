@@ -3,7 +3,10 @@
 import { Button, Card, Icon, PasswordInput } from "@/components/ui";
 import { useChangePasswordForm, type ChangePasswordValues } from "../../hooks";
 import { PasswordPolicyPanel } from "../PasswordPolicyPanel";
-import styles from "./ChangePasswordCard.module.css";
+import { cn } from "@/lib/cn";
+
+/** Inline feedback under the confirm field. */
+const HINT = "flex items-center gap-1.5 mt-1.5 text-xs font-semibold";
 
 export interface ChangePasswordCardProps {
   onSubmit?: (values: ChangePasswordValues) => void | Promise<void>;
@@ -53,14 +56,27 @@ export function ChangePasswordCard({ onSubmit }: ChangePasswordCardProps) {
         }
       >
         {status === "saved" && (
-          <p className={styles.saved} role="status">
-            <Icon name="check_circle" className={styles.savedIcon} filled />
+          <p
+            className={cn(
+              "flex items-center gap-[9px] mb-[18px] py-3 px-3.5 rounded-xl",
+              "bg-success-tint border border-solid border-success-tint-border",
+              "text-sm font-semibold text-success-text",
+            )}
+            role="status"
+          >
+            <Icon name="check_circle" className="[--icon-size:18px]" filled />
             Your password has been updated.
           </p>
         )}
 
-        <div className={styles.layout}>
-          <div className={styles.fields}>
+        <div
+          className={cn(
+            "grid grid-cols-[minmax(0,1fr)_minmax(240px,300px)] items-start",
+            "gap-[clamp(18px,2.6vw,32px)]",
+            "max-[860px]:grid-cols-[minmax(0,1fr)]",
+          )}
+        >
+          <div className="flex flex-col gap-4">
             <PasswordInput
               id="current-password"
               name="currentPassword"
@@ -103,14 +119,14 @@ export function ChangePasswordCard({ onSubmit }: ChangePasswordCardProps) {
               />
 
               {confirmMismatch && (
-                <p className={`${styles.hint} ${styles.hintBad}`}>
-                  <Icon name="error" className={styles.hintIcon} filled />
+                <p className={cn(HINT, "text-error")}>
+                  <Icon name="error" className="[--icon-size:15px]" filled />
                   Passwords don&apos;t match yet
                 </p>
               )}
               {confirmMatches && (
-                <p className={`${styles.hint} ${styles.hintOk}`}>
-                  <Icon name="check_circle" className={styles.hintIcon} filled />
+                <p className={cn(HINT, "text-success-text")}>
+                  <Icon name="check_circle" className="[--icon-size:15px]" filled />
                   Passwords match
                 </p>
               )}

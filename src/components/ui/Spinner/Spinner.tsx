@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import styles from "./Spinner.module.css";
+import { cn } from "@/lib/cn";
 
 export interface SpinnerProps {
   /** Any CSS length. Defaults to 1em so it tracks the surrounding text. */
@@ -12,7 +12,17 @@ export interface SpinnerProps {
 export function Spinner({ size, className, label }: SpinnerProps) {
   return (
     <span
-      className={`${styles.spinner} ${className ?? ""}`}
+      className={cn(
+        "inline-block shrink-0 rounded-full",
+        "w-[var(--spinner-size,1em)] h-[var(--spinner-size,1em)]",
+        // border-style/color are spelled out: Preflight is off, so a width
+        // utility alone would leave border-style at its `none` default.
+        "border-2 border-solid border-current border-r-transparent",
+        // Trims the optical weight so it sits nicely beside a text label.
+        "opacity-90",
+        "animate-spin motion-reduce:[animation-duration:1.5s]",
+        className,
+      )}
       style={size ? ({ "--spinner-size": size } as CSSProperties) : undefined}
       role={label ? "status" : undefined}
       aria-label={label}

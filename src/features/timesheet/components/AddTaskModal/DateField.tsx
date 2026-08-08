@@ -5,7 +5,23 @@ import { createPortal } from "react-dom";
 import { Icon } from "@/components/ui";
 import { POPOVER_LAYER_ATTR, useDismissable, usePopoverPosition } from "@/hooks";
 import { MONTHS, WEEKDAYS, parseISODate, toISODate, weekdayIndex } from "../../utils";
-import styles from "./DateField.module.css";
+import { cn } from "@/lib/cn";
+
+/* Cells shared by the day, month and year pickers. */
+const CELL = cn(
+  "flex items-center justify-center rounded-[8px] text-[0.8125rem]",
+  "text-on-background",
+  "transition-[background-color,color] duration-[130ms] ease-[ease]",
+);
+const CELL_SELECTED = "text-on-primary bg-primary font-semibold";
+const PICKER_GRID = "grid grid-cols-[repeat(3,1fr)] gap-1";
+
+const NAV_BUTTON = cn(
+  "inline-flex items-center justify-center w-[26px] h-[26px] rounded-[7px]",
+  "text-on-surface-variant",
+  "transition-[background-color,color] duration-[130ms] ease-[ease]",
+  "hover:bg-surface-low hover:text-on-background",
+);
 
 export interface DateFieldProps {
   id: string;
@@ -96,31 +112,45 @@ export function DateField({ id, label, value, onChange, required, min, errorText
   };
 
   return (
-    <div className={styles.field}>
-      <label className={styles.label} htmlFor={id}>
+    <div className="flex flex-col gap-1 min-w-0">
+      <label className="text-label-sm font-semibold text-on-surface-variant" htmlFor={id}>
         {label}
-        {required && <span className={styles.required}>*</span>}
+        {required && <span className="ml-[3px] text-error">*</span>}
       </label>
 
       <button
         ref={triggerRef}
         type="button"
         id={id}
-        className={`${styles.trigger} ${errorText ? styles.triggerError : ""}`}
+        className={cn(
+          // Matches TextInput's field chrome.
+          "group flex items-center justify-between gap-2 w-full",
+          "py-[clamp(9px,1.7vh,12px)] px-4",
+          "border border-solid border-outline-variant rounded-md",
+          "bg-surface-lowest text-body-md text-left",
+          "transition-[border-color,box-shadow] duration-fast ease-[ease]",
+          "hover:border-outline",
+          "aria-expanded:outline-none aria-expanded:border-primary",
+          "aria-expanded:shadow-[0_0_0_3px_var(--color-focus-ring)]",
+          errorText && "border-error",
+        )}
         aria-haspopup="dialog"
         aria-expanded={isOpen}
         onClick={() => (isOpen ? close() : open())}
       >
-        <span className={selected ? styles.value : styles.placeholder}>
+        <span className={selected ? "text-on-background" : "text-outline"}>
           {selected
             ? `${selected.getDate()} ${MONTHS[selected.getMonth()]} ${selected.getFullYear()}`
             : "Select date"}
         </span>
-        <Icon name="calendar_today" size={17} className={styles.calendarIcon} />
+        <Icon name="calendar_today" size={17} className={cn(
+            "shrink-0 text-outline transition-colors duration-fast ease-[ease]",
+            "group-aria-expanded:text-primary",
+          )} />
       </button>
 
       {errorText && (
-        <span className={styles.errorText} role="alert">
+        <span className="text-label-sm text-error" role="alert">
           {errorText}
         </span>
       )}
@@ -129,7 +159,17 @@ export function DateField({ id, label, value, onChange, required, min, errorText
         createPortal(
           <div
             ref={popoverRef}
-            className={styles.popover}
+            className={cn(
+              // Fixed + portaled (see below) so this floats above the modal
+              // instead of stretching its scroll container to fit.
+              "fixed z-[1000] w-[268px] overflow-y-auto p-3",
+              // Last-resort cap for very short viewports; usePopoverPosition
+              // flips the popover above the trigger when it will not fit below.
+              "max-h-[90vh]",
+              "rounded-[14px] bg-surface-lowest",
+              "border border-solid border-hairline-strong shadow-panel",
+              "origin-top-left animate-popover-in motion-reduce:animate-none",
+            )}
             role="dialog"
             aria-label={`${label} calendar`}
             {...{ [POPOVER_LAYER_ATTR]: "" }}
@@ -144,26 +184,34 @@ export function DateField({ id, label, value, onChange, required, min, errorText
           >
             {pickerMode === "days" && (
               <>
-                <div className={styles.calendarHead}>
+                <div className="flex items-center justify-between mb-2.5">
                   <button
                     type="button"
-                    className={styles.navButton}
+                    className={NAV_BUTTON}
                     onClick={() => changeMonth(-1)}
                     aria-label="Previous month"
                   >
                     <Icon name="chevron_left" size={18} />
                   </button>
-                  <span className={styles.headLabels}>
+                  <span className="flex items-center gap-1">
                     <button
                       type="button"
-                      className={styles.headLabelButton}
+                      className={cn(
+                "py-[3px] px-[7px] rounded-[6px] text-[0.8125rem] font-bold",
+                "text-on-background transition-colors duration-[130ms] ease-[ease]",
+                "hover:bg-surface-low",
+              )}
                       onClick={() => setPickerMode("month")}
                     >
                       {MONTHS[viewMonth.getMonth()]}
                     </button>
                     <button
                       type="button"
-                      className={styles.headLabelButton}
+                      className={cn(
+                "py-[3px] px-[7px] rounded-[6px] text-[0.8125rem] font-bold",
+                "text-on-background transition-colors duration-[130ms] ease-[ease]",
+                "hover:bg-surface-low",
+              )}
                       onClick={() => setPickerMode("year")}
                     >
                       {viewMonth.getFullYear()}
@@ -171,7 +219,7 @@ export function DateField({ id, label, value, onChange, required, min, errorText
                   </span>
                   <button
                     type="button"
-                    className={styles.navButton}
+                    className={NAV_BUTTON}
                     onClick={() => changeMonth(1)}
                     aria-label="Next month"
                   >
@@ -179,15 +227,15 @@ export function DateField({ id, label, value, onChange, required, min, errorText
                   </button>
                 </div>
 
-                <div className={styles.weekdayRow}>
+                <div className="grid grid-cols-[repeat(7,1fr)] mb-1">
                   {WEEKDAYS.map((day) => (
-                    <span key={day} className={styles.weekdayCell}>
+                    <span key={day} className="flex items-center justify-center h-[26px] text-[0.6875rem] font-semibold text-outline">
                       {day.slice(0, 2)}
                     </span>
                   ))}
                 </div>
 
-                <div className={styles.dayGrid}>
+                <div className="grid grid-cols-[repeat(7,1fr)] gap-0.5">
                   {grid.map((date) => {
                     const iso = toISODate(date);
                     const inMonth = date.getMonth() === viewMonth.getMonth();
@@ -199,14 +247,17 @@ export function DateField({ id, label, value, onChange, required, min, errorText
                       <button
                         key={iso}
                         type="button"
-                        className={[
-                          styles.day,
-                          inMonth ? "" : styles.dayOutside,
-                          isSelected ? styles.daySelected : "",
-                          isToday && !isSelected ? styles.dayToday : "",
-                        ]
-                          .filter(Boolean)
-                          .join(" ")}
+                        className={cn(
+                          CELL,
+                          "h-[30px]",
+                          "enabled:hover:bg-surface-low",
+                          "disabled:text-outline disabled:opacity-40",
+                          "disabled:cursor-default",
+                          !inMonth && "text-outline",
+                          isToday && !isSelected && "font-bold text-accent-text",
+                          isSelected &&
+                            "text-on-primary bg-primary font-semibold enabled:hover:bg-primary",
+                        )}
                         disabled={isDisabled}
                         onClick={() => {
                           onChange(iso);
@@ -223,27 +274,30 @@ export function DateField({ id, label, value, onChange, required, min, errorText
 
             {pickerMode === "month" && (
               <>
-                <div className={styles.calendarHead}>
+                <div className="flex items-center justify-between mb-2.5">
                   <button
                     type="button"
-                    className={styles.navButton}
+                    className={NAV_BUTTON}
                     onClick={() => setPickerMode("days")}
                     aria-label="Back to calendar"
                   >
                     <Icon name="arrow_back" size={17} />
                   </button>
-                  <span className={styles.monthLabel}>Select month</span>
-                  <span className={styles.navButtonSpacer} aria-hidden="true" />
+                  <span className="text-[0.8125rem] font-bold text-on-background">Select month</span>
+                  <span className="w-[26px] h-[26px]" aria-hidden="true" />
                 </div>
 
-                <div className={styles.monthGrid}>
+                <div className={PICKER_GRID}>
                   {MONTHS.map((month, index) => (
                     <button
                       key={month}
                       type="button"
-                      className={`${styles.monthCell} ${
-                        index === viewMonth.getMonth() ? styles.monthCellSelected : ""
-                      }`}
+                      className={cn(
+                        CELL,
+                        "h-9 hover:bg-surface-low",
+                        index === viewMonth.getMonth() &&
+                          cn(CELL_SELECTED, "hover:bg-primary"),
+                      )}
                       onClick={() => {
                         setViewMonth(new Date(viewMonth.getFullYear(), index, 1));
                         setPickerMode("days");
@@ -258,20 +312,25 @@ export function DateField({ id, label, value, onChange, required, min, errorText
 
             {pickerMode === "year" && (
               <>
-                <div className={styles.calendarHead}>
+                <div className="flex items-center justify-between mb-2.5">
                   <button
                     type="button"
-                    className={styles.navButton}
+                    className={NAV_BUTTON}
                     onClick={() => setPickerMode("days")}
                     aria-label="Back to calendar"
                   >
                     <Icon name="arrow_back" size={17} />
                   </button>
-                  <span className={styles.monthLabel}>Select year</span>
-                  <span className={styles.navButtonSpacer} aria-hidden="true" />
+                  <span className="text-[0.8125rem] font-bold text-on-background">Select year</span>
+                  <span className="w-[26px] h-[26px]" aria-hidden="true" />
                 </div>
 
-                <div className={styles.yearList} ref={yearListRef}>
+                <div className={cn(
+                PICKER_GRID,
+                // Positioned so each year button's offsetTop is measured
+                // against this list, which the centre-on-open scroll assumes.
+                "relative max-h-[216px] overflow-y-auto",
+              )} ref={yearListRef}>
                   {years.map((year) => {
                     const isSelected = year === viewMonth.getFullYear();
                     return (
@@ -279,7 +338,11 @@ export function DateField({ id, label, value, onChange, required, min, errorText
                         key={year}
                         ref={isSelected ? selectedYearRef : undefined}
                         type="button"
-                        className={`${styles.yearCell} ${isSelected ? styles.yearCellSelected : ""}`}
+                        className={cn(
+                          CELL,
+                          "h-9 hover:bg-surface-low",
+                          isSelected && cn(CELL_SELECTED, "hover:bg-primary"),
+                        )}
                         onClick={() => {
                           setViewMonth(new Date(year, viewMonth.getMonth(), 1));
                           setPickerMode("days");

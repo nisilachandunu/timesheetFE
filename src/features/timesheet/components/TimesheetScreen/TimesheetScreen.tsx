@@ -12,12 +12,15 @@ import { ColumnsMenu } from "../ColumnsMenu";
 import { StatusChip } from "../StatusChip";
 import { TimesheetGrid } from "../TimesheetGrid";
 import { TimesheetToolbar } from "../TimesheetToolbar";
-import styles from "./TimesheetScreen.module.css";
+import { cn } from "@/lib/cn";
 
 interface PendingAdd {
   group: TaskRow["group"];
   project?: { id: string; name: string };
 }
+
+/* Skeleton blocks: a plain tinted rectangle, repeated at several sizes. */
+const SKEL = "bg-surface-high";
 
 export function TimesheetScreen() {
   const week = useWeek();
@@ -49,8 +52,12 @@ export function TimesheetScreen() {
   const actions = (
     <>
       {sheet.isDirty && (
-        <span className={styles.dirty}>
-          <span className={styles.dirtyDot} aria-hidden="true" />
+        <span className={"inline-flex items-center gap-1.5 mr-1 text-xs font-semibold whitespace-nowrap text-on-surface-variant"}>
+          <span className={cn(
+            "w-[7px] h-[7px] rounded-full bg-primary",
+            "shadow-[0_0_0_3px_var(--color-accent-tint)]",
+            "animate-pulse-glow motion-reduce:animate-none",
+          )} aria-hidden="true" />
           Unsaved changes
         </span>
       )}
@@ -87,7 +94,14 @@ export function TimesheetScreen() {
   );
 
   return (
-    <div className={styles.page}>
+    <div className={cn(
+        "flex flex-col gap-[clamp(14px,2vh,20px)]",
+        // Fills the shell's content area so the panel below can be capped at
+        // the space actually on screen. Without a definite height the grid's
+        // scroller cannot know how tall it may be, and the whole page scrolls
+        // instead — two scrollbars for one table.
+        "h-full",
+      )}>
       <PageHeader
         title="Timesheet"
         description="Report time spent on tasks, week by week."
@@ -97,73 +111,81 @@ export function TimesheetScreen() {
       {isLoading || !week.isReady || !week.weekStart ? (
         /* The current week is resolved after mount — see useWeek — so the
            grid gets a high-fidelity skeleton rather than a blank state on first paint. */
-        <div className={styles.skeleton} aria-hidden="true">
-          <div className={styles.skeletonToolbar}>
-            <div className={styles.skelNav}>
-              <div className={styles.skelBtn} />
-              <div className={styles.skelDate} />
-              <div className={styles.skelBtn} />
-              <div className={styles.skelChip} />
+        <div className={cn(
+          "relative flex flex-col min-h-0 rounded-[14px] overflow-hidden",
+          "bg-surface-lowest border border-solid border-hairline shadow-card",
+          // Holographic shimmer sweeping the whole skeleton.
+          "after:content-[''] after:absolute after:inset-0 after:-translate-x-full",
+          "after:bg-[linear-gradient(90deg,transparent_0%,rgba(255,255,255,0.03)_25%,rgba(106,57,219,0.08)_50%,rgba(255,255,255,0.05)_75%,transparent_100%)]",
+          "after:animate-shimmer-wave motion-reduce:after:animate-none",
+          "after:pointer-events-none after:z-[5]",
+        )} aria-hidden="true">
+          <div className={"flex items-center justify-between p-3.5 bg-surface-lowest border-b border-solid border-hairline"}>
+            <div className={"flex items-center gap-2"}>
+              <div className={cn("w-[34px] h-[34px] rounded-[8px]", SKEL)} />
+              <div className={cn("w-[140px] h-5 rounded-[6px] mx-1", SKEL)} />
+              <div className={cn("w-[34px] h-[34px] rounded-[8px]", SKEL)} />
+              <div className={"w-[70px] h-5 rounded-[6px] bg-accent-tint"} />
             </div>
-            <div className={styles.skelTotal}>
-              <div className={styles.skelTextSm} />
-              <div className={styles.skelTextLg} />
-              <div className={styles.skelBar} />
+            <div className={"flex flex-col gap-1 w-[130px]"}>
+              <div className={cn("w-[90px] h-2.5 rounded-[4px]", SKEL)} />
+              <div className={cn("w-[70px] h-4 rounded-[5px]", SKEL)} />
+              <div className={"w-full h-1 rounded-full bg-hairline-strong"} />
             </div>
           </div>
-          <div className={styles.skeletonGrid}>
-            <div className={styles.skelHead}>
-              <div className={styles.skelHeadColTask} />
-              <div className={styles.skelHeadCol} />
-              <div className={styles.skelHeadCol} />
-              <div className={styles.skelHeadCol} />
-              <div className={styles.skelHeadCol} />
-              <div className={styles.skelHeadCol} />
-              <div className={styles.skelHeadCol} />
-              <div className={styles.skelHeadCol} />
+          <div className={"flex flex-col bg-surface-lowest"}>
+            <div className={"flex items-center h-[42px] px-3.5 gap-3 bg-surface-low border-b border-solid border-hairline-strong"}>
+              <div className={"w-[220px] h-3 rounded-[4px] shrink-0 bg-surface-highest"} />
+              <div className={"flex-1 h-3 rounded-[4px] bg-surface-highest"} />
+              <div className={"flex-1 h-3 rounded-[4px] bg-surface-highest"} />
+              <div className={"flex-1 h-3 rounded-[4px] bg-surface-highest"} />
+              <div className={"flex-1 h-3 rounded-[4px] bg-surface-highest"} />
+              <div className={"flex-1 h-3 rounded-[4px] bg-surface-highest"} />
+              <div className={"flex-1 h-3 rounded-[4px] bg-surface-highest"} />
+              <div className={"flex-1 h-3 rounded-[4px] bg-surface-highest"} />
             </div>
-            <div className={styles.skelGroupRow}>
-              <div className={styles.skelGroupIcon} />
-              <div className={styles.skelGroupTitle} />
+            <div className={"flex items-center h-9 px-3.5 gap-2.5 bg-accent-tint-faint border-t border-b border-solid border-accent-tint-border"}>
+              <div className={"w-5 h-5 rounded-[6px] bg-accent-tint"} />
+              <div className={"w-[180px] h-3.5 rounded-[4px] bg-accent-tint"} />
             </div>
-            <div className={styles.skelTaskRow}>
-              <div className={styles.skelTaskTitle} />
-              <div className={styles.skelDayCells}>
-                <div className={styles.skelPill} />
-                <div className={styles.skelPill} />
-                <div className={styles.skelPill} />
-                <div className={styles.skelPill} />
-                <div className={styles.skelPill} />
-                <div className={styles.skelPill} />
-                <div className={styles.skelPill} />
+            <div className={"flex items-center h-10 px-3.5 gap-3 border-b border-solid border-hairline-faint"}>
+              <div className={cn("w-[180px] h-3.5 ml-6 rounded-[4px] shrink-0", SKEL)} />
+              <div className={"flex items-center flex-1 gap-3"}>
+                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low border border-solid border-hairline"} />
+                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low border border-solid border-hairline"} />
+                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low border border-solid border-hairline"} />
+                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low border border-solid border-hairline"} />
+                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low border border-solid border-hairline"} />
+                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low border border-solid border-hairline"} />
+                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low border border-solid border-hairline"} />
               </div>
             </div>
-            <div className={styles.skelTaskRow}>
-              <div className={styles.skelTaskTitleSm} />
-              <div className={styles.skelDayCells}>
-                <div className={styles.skelPill} />
-                <div className={styles.skelPill} />
-                <div className={styles.skelPill} />
-                <div className={styles.skelPill} />
-                <div className={styles.skelPill} />
-                <div className={styles.skelPill} />
-                <div className={styles.skelPill} />
+            <div className={"flex items-center h-10 px-3.5 gap-3 border-b border-solid border-hairline-faint"}>
+              <div className={cn("w-[130px] h-3.5 ml-6 rounded-[4px] shrink-0", SKEL)} />
+              <div className={"flex items-center flex-1 gap-3"}>
+                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low border border-solid border-hairline"} />
+                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low border border-solid border-hairline"} />
+                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low border border-solid border-hairline"} />
+                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low border border-solid border-hairline"} />
+                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low border border-solid border-hairline"} />
+                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low border border-solid border-hairline"} />
+                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low border border-solid border-hairline"} />
               </div>
             </div>
-            <div className={styles.skelGroupRow}>
-              <div className={styles.skelGroupIcon} />
-              <div className={styles.skelGroupTitleSm} />
+            <div className={"flex items-center h-9 px-3.5 gap-2.5 bg-accent-tint-faint border-t border-b border-solid border-accent-tint-border"}>
+              <div className={"w-5 h-5 rounded-[6px] bg-accent-tint"} />
+              <div className={"w-[120px] h-3.5 rounded-[4px] bg-accent-tint"} />
             </div>
-            <div className={styles.skelTaskRow}>
-              <div className={styles.skelTaskTitle} />
-              <div className={styles.skelDayCells}>
-                <div className={styles.skelPill} />
-                <div className={styles.skelPill} />
-                <div className={styles.skelPill} />
-                <div className={styles.skelPill} />
-                <div className={styles.skelPill} />
-                <div className={styles.skelPill} />
-                <div className={styles.skelPill} />
+            <div className={"flex items-center h-10 px-3.5 gap-3 border-b border-solid border-hairline-faint"}>
+              <div className={cn("w-[180px] h-3.5 ml-6 rounded-[4px] shrink-0", SKEL)} />
+              <div className={"flex items-center flex-1 gap-3"}>
+                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low border border-solid border-hairline"} />
+                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low border border-solid border-hairline"} />
+                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low border border-solid border-hairline"} />
+                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low border border-solid border-hairline"} />
+                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low border border-solid border-hairline"} />
+                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low border border-solid border-hairline"} />
+                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low border border-solid border-hairline"} />
               </div>
             </div>
           </div>
@@ -171,7 +193,19 @@ export function TimesheetScreen() {
       ) : (
         /* Toolbar, banner and grid share one bordered panel: as separate
            floating cards they read as three unrelated widgets. */
-        <div className={styles.panel}>
+        <div className={cn(
+          // One container holds the toolbar, banner, grid and hint as
+          // horizontal bands, so the screen reads as a single object.
+          "relative flex flex-col min-h-0 rounded-[14px] overflow-hidden",
+          "bg-surface-lowest border border-solid border-hairline",
+          "shadow-[0_1px_3px_rgba(0,0,0,0.03),0_12px_28px_-8px_rgba(0,0,0,0.05),0_0_0_1px_var(--color-hairline)]",
+          "animate-panel-entrance motion-reduce:animate-none",
+          // Laser light ray sweeping the top edge on load.
+          "before:content-[''] before:absolute before:top-0 before:left-[-30%]",
+          "before:w-[28%] before:h-0.5 before:z-10 before:pointer-events-none",
+          "before:bg-[linear-gradient(90deg,transparent,var(--color-primary),rgba(255,255,255,0.95),var(--color-primary),transparent)]",
+          "before:animate-border-light-ray motion-reduce:before:animate-none",
+        )}>
           <TimesheetToolbar
             weekStart={week.weekStart}
             isCurrentWeek={week.isCurrentWeek}
@@ -191,8 +225,14 @@ export function TimesheetScreen() {
           </TimesheetToolbar>
 
           {sheet.isLocked && (
-            <div className={styles.locked} role="status">
-              <Icon name="lock" size={18} className={styles.lockedIcon} />
+            <div className={cn(
+            "flex items-center shrink-0 gap-2.5 py-[11px] px-3.5",
+            "text-[0.8125rem] text-on-surface-variant bg-accent-tint-faint",
+            "border-b border-solid border-hairline",
+            "max-[720px]:flex-wrap",
+            "[&>span:first-of-type]:flex-1 [&>span:first-of-type]:min-w-0",
+          )} role="status">
+              <Icon name="lock" size={18} className={"shrink-0 text-accent-text"} />
               <span>
                 This week has been submitted and is awaiting approval. Reopen it to
                 make further changes.
@@ -215,8 +255,17 @@ export function TimesheetScreen() {
             onReorderColumn={columnsApi.reorderColumn}
           />
 
-          <p className={styles.tip}>
-            <Icon name="keyboard" size={16} className={styles.tipIcon} />
+          <p className={cn(
+            "flex items-center shrink-0 gap-[7px] py-2.5 px-3.5",
+            "text-xs text-outline bg-surface-lowest",
+            "border-t border-solid border-hairline",
+            "[&_code]:py-px [&_code]:px-[5px] [&_code]:rounded-[5px]",
+            // The project's own stack, not Tailwind's default `font-mono`.
+            "[&_code]:[font-family:ui-monospace,'SFMono-Regular','Consolas',monospace]",
+            "[&_code]:text-[0.6875rem]",
+            "[&_code]:text-on-surface-variant [&_code]:bg-surface-container",
+          )}>
+            <Icon name="keyboard" size={16} className={"shrink-0"} />
             Arrow keys move between day cells, Enter drops to the next row. Hours
             accept <code>7.5</code> or <code>7:30</code>.
           </p>

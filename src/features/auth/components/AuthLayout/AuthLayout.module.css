@@ -1,58 +1,10 @@
+/* dvh tracks mobile browser chrome; the vh line above it is the fallback for
+   engines without dvh support.
+
+   Kept as plain CSS deliberately: expressed as `h-screen h-[100dvh]` Tailwind
+   sorts arbitrary values before named ones, so `.h-screen` would be emitted
+   last and win — silently discarding the dvh value this rule exists for. */
 .layout {
-  display: flex;
-  /* dvh tracks mobile browser chrome; vh is the fallback for older engines. */
   height: 100vh;
   height: 100dvh;
-  width: 100%;
-  overflow: hidden;
-  background: var(--color-surface-container-lowest);
-}
-
-.formSlot {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* Contains absolutely positioned descendants so they cannot escape this
-     scroll container and extend the document. */
-  position: relative;
-  padding: clamp(16px, 3vh, 48px) clamp(20px, 2.5vw, 48px);
-  background: var(--color-surface-container-lowest);
-  overflow: hidden;
-}
-
-/* Pinned to the form pane's top-right, clear of the centred form column.
-   Fixed below the desktop breakpoint so it stays put while the form scrolls. */
-.themeToggle {
-  position: absolute;
-  z-index: 5;
-  top: clamp(16px, 3vh, 32px);
-  right: clamp(16px, 2.5vw, 32px);
-}
-
-/* Single-column: branding panel hides itself, form fills the viewport.
-   Allow scrolling here since a small phone genuinely cannot fit the form —
-   the scrollbar chrome itself stays hidden (see .hide-scrollbar). */
-@media (max-width: 1023px) {
-  .formSlot {
-    padding: var(--space-8) var(--space-6);
-    overflow-y: auto;
-  }
-
-  /* The pane scrolls here, so anchor to the viewport instead of scrolling
-     the control off the top. */
-  .themeToggle {
-    position: fixed;
-    top: var(--space-4);
-    right: var(--space-4);
-  }
-}
-
-@media (max-width: 480px) {
-  .formSlot {
-    /* Extra head room keeps the form clear of the pinned toggle. */
-    padding: var(--space-12) var(--margin-mobile) var(--space-6);
-    align-items: flex-start;
-  }
 }

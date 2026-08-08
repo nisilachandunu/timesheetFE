@@ -1,6 +1,22 @@
 /* ==========================================================================
    Timesheet grid
 
+   DELIBERATELY STILL CSS MODULES.
+
+   The rest of the app moved to Tailwind utilities; this file did not, because
+   what it does is the part utilities express worst:
+     - five `position: sticky` columns whose left/right offsets are computed
+       from the widths of the columns before them;
+     - twelve `grid-template-columns` declarations whose track lists are built
+       at runtime by useFittedColumns/useColumnLayout;
+     - `::-webkit-scrollbar` chrome, which has no utility equivalent;
+     - drag-to-resize handles keyed off sibling and state selectors.
+
+   Rewriting these as arbitrary-value utilities would make them longer, harder
+   to read, and impossible to keep in step with the hooks that drive them. The
+   design tokens it consumes are the same ones the Tailwind theme maps, so both
+   styling systems stay in sync through globals.css.
+
    Three rules keep this readable at a glance:
    1. One type scale — 14px data, 12px meta, 11px uppercase headings. Nothing
       else. The previous five sizes were what made rows feel "stacked".

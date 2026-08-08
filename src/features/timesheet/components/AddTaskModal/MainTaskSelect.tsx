@@ -5,7 +5,23 @@ import { createPortal } from "react-dom";
 import { Icon } from "@/components/ui";
 import { POPOVER_LAYER_ATTR, useDismissable, usePopoverPosition } from "@/hooks";
 import type { MainTaskOption } from "../../types";
-import styles from "./MainTaskSelect.module.css";
+import { cn } from "@/lib/cn";
+
+/* Matches TextInput's field chrome (same height, border, radius) so the
+   dropdown reads as part of the same form language, not a separate widget. */
+const TRIGGER = cn(
+  "group flex items-center justify-between gap-2 w-full h-11 px-4",
+  "border border-solid border-outline-variant rounded-md",
+  "bg-surface-lowest text-body-md text-left",
+  "transition-[border-color,box-shadow] duration-fast ease-[ease]",
+  "hover:border-outline",
+  "aria-expanded:border-primary",
+  "aria-expanded:shadow-[0_0_0_3px_var(--color-focus-ring)]",
+);
+
+/* Placeholder shares TextInput's ::placeholder colour and weight — no italic,
+   so the two "empty field" states in this form read as one language. */
+const LABEL_TEXT = "overflow-hidden text-ellipsis whitespace-nowrap text-sm";
 
 export interface MainTaskSelectProps {
   id: string;
@@ -46,18 +62,28 @@ export function MainTaskSelect({ id, options, value, onChange }: MainTaskSelectP
         ref={triggerRef}
         type="button"
         id={id}
-        className={styles.trigger}
+        className={TRIGGER}
         aria-haspopup="listbox"
         aria-expanded={isOpen}
         onClick={() => setIsOpen((open) => !open)}
       >
-        <span className={selected ? styles.value : styles.placeholder}>
+        <span
+          className={cn(
+            LABEL_TEXT,
+            selected ? "text-on-background" : "text-outline",
+          )}
+        >
           {selected ? selected.label : "Select main task"}
         </span>
         <Icon
           name="expand_more"
           size={19}
-          className={`${styles.chevron} ${isOpen ? styles.chevronOpen : ""}`}
+          className={cn(
+            "shrink-0 text-outline",
+            "transition-[color,transform] duration-fast ease-[ease]",
+            "group-aria-expanded:text-primary",
+            isOpen && "rotate-180",
+          )}
         />
       </button>
 
@@ -65,7 +91,14 @@ export function MainTaskSelect({ id, options, value, onChange }: MainTaskSelectP
         createPortal(
           <ul
             ref={menuRef}
-            className={styles.menu}
+            className={cn(
+              // Fixed + portaled (see the note above) so this floats above the
+              // modal instead of stretching its scroll container to fit.
+              "fixed z-[1000] max-h-[240px] overflow-y-auto p-1.5",
+              "rounded-[14px] bg-surface-lowest list-none",
+              "border border-solid border-hairline-strong shadow-panel",
+              "origin-top animate-menu-in-select motion-reduce:animate-none",
+            )}
             role="listbox"
             aria-label="Main task"
             tabIndex={-1}
@@ -85,14 +118,22 @@ export function MainTaskSelect({ id, options, value, onChange }: MainTaskSelectP
                 <li key={option.id} role="option" aria-selected={isSelected}>
                   <button
                     type="button"
-                    className={`${styles.option} ${isSelected ? styles.optionSelected : ""}`}
+                    className={cn(
+                      "flex items-center justify-between gap-2 w-full",
+                      "py-[9px] px-2.5 rounded-[9px] text-sm text-left",
+                      "text-on-background",
+                      "transition-colors duration-[130ms] ease-[ease]",
+                      "hover:bg-surface-low",
+                      isSelected &&
+                        "text-accent-text bg-accent-tint hover:bg-accent-tint",
+                    )}
                     onClick={() => {
                       onChange(option.id);
                       close();
                     }}
                   >
                     {option.label}
-                    {isSelected && <Icon name="check" size={17} className={styles.checkIcon} />}
+                    {isSelected && <Icon name="check" size={17} className="shrink-0 text-accent-text" />}
                   </button>
                 </li>
               );

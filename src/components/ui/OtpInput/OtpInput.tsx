@@ -6,7 +6,7 @@ import {
   type KeyboardEvent,
   type ChangeEvent,
 } from "react";
-import styles from "./OtpInput.module.css";
+import { cn } from "@/lib/cn";
 
 export interface OtpInputProps {
   /** Current code. May be shorter than `length` while being typed. */
@@ -24,6 +24,18 @@ export interface OtpInputProps {
 }
 
 const DIGITS_ONLY = /\D/g;
+
+const SLOT = cn(
+  "w-full aspect-square max-h-[clamp(44px,8vh,60px)] min-w-0 text-center",
+  "text-[clamp(1.125rem,3vh,1.5rem)] font-bold text-on-background",
+  "bg-surface-lowest border border-solid border-outline-variant rounded-md",
+  "transition-[border-color,box-shadow,background-color] duration-fast ease-[ease]",
+  "focus:outline-none focus:border-primary",
+  "focus:shadow-[0_0_0_3px_var(--color-focus-ring)]",
+  // Hide number-input spinners so the slot stays a clean square.
+  "[&::-webkit-outer-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0",
+  "[&::-webkit-inner-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0",
+);
 
 export function OtpInput({
   value,
@@ -105,7 +117,11 @@ export function OtpInput({
   };
 
   return (
-    <div className={styles.group} role="group" aria-label={label}>
+    <div
+      className="flex justify-between gap-[clamp(6px,1.4vh,12px)]"
+      role="group"
+      aria-label={label}
+    >
       {Array.from({ length }, (_, index) => {
         const char = value[index] ?? "";
         return (
@@ -114,9 +130,12 @@ export function OtpInput({
             ref={(el) => {
               inputsRef.current[index] = el;
             }}
-            className={`${styles.slot} ${char.trim() ? styles.filled : ""} ${
-              invalid ? styles.error : ""
-            }`}
+            className={cn(
+              SLOT,
+              char.trim() && "border-primary bg-accent-tint-faint",
+              invalid &&
+                "border-error focus:shadow-[0_0_0_3px_rgba(186,26,26,0.15)]",
+            )}
             type="text"
             inputMode="numeric"
             autoComplete={index === 0 ? "one-time-code" : "off"}

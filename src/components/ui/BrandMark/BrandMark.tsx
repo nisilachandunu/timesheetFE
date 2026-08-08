@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import styles from "./BrandMark.module.css";
+import { cn } from "@/lib/cn";
 
 export interface BrandMarkProps {
   /** Rendered box size in pixels. */
@@ -16,13 +16,20 @@ export interface BrandMarkProps {
 export function BrandMark({ size = 36, className }: BrandMarkProps) {
   return (
     <span
-      className={`${styles.mark} ${className ?? ""}`}
+      className={cn(
+        "inline-flex items-center justify-center shrink-0 text-white",
+        "w-[var(--mark-size,36px)] h-[var(--mark-size,36px)]",
+        "rounded-[calc(var(--mark-size,36px)*0.28)]",
+        "bg-[linear-gradient(140deg,#a78bfa_0%,#6366f1_52%,#4f46e5_100%)]",
+        "shadow-[0_6px_16px_-6px_rgba(99,76,232,0.7),inset_0_1px_0_rgba(255,255,255,0.45)]",
+        className,
+      )}
       style={{ "--mark-size": `${size}px` } as CSSProperties}
       aria-hidden="true"
     >
-      <svg className={styles.glyph} viewBox="0 0 32 32" fill="none">
+      <svg className="w-[62%] h-[62%]" viewBox="0 0 32 32" fill="none">
         <circle
-          className={styles.ring}
+          className="opacity-50"
           cx="16"
           cy="16"
           r="12"

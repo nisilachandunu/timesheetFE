@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Icon } from "../Icon";
-import styles from "./DetailField.module.css";
+import { cn } from "@/lib/cn";
 
 export interface DetailFieldProps {
   label: string;
@@ -41,12 +41,29 @@ export function DetailField({ label, value, icon, copyable = false }: DetailFiel
   };
 
   return (
-    <div className={styles.field}>
-      {icon && <Icon name={icon} className={styles.icon} />}
+    <div
+      className={cn(
+        "group flex items-center gap-3 py-3 px-3.5 rounded-lg",
+        "bg-surface-low border border-solid border-hairline-faint",
+        "transition-[border-color] duration-[180ms] ease-[ease]",
+        "hover:border-hairline-strong",
+      )}
+    >
+      {icon && (
+        <Icon name={icon} className="[--icon-size:19px] shrink-0 text-outline" />
+      )}
 
-      <span className={styles.text}>
-        <span className={styles.label}>{label}</span>
-        <span className={styles.value} title={value}>
+      <span className="min-w-0 flex-1">
+        <span className="block text-[0.6875rem] font-bold tracking-[0.09em] uppercase text-outline">
+          {label}
+        </span>
+        <span
+          className={cn(
+            "block mt-0.5 text-[0.9375rem] font-medium text-on-background",
+            "overflow-hidden text-ellipsis whitespace-nowrap",
+          )}
+          title={value}
+        >
           {value}
         </span>
       </span>
@@ -54,7 +71,17 @@ export function DetailField({ label, value, icon, copyable = false }: DetailFiel
       {copyable && (
         <button
           type="button"
-          className={`${styles.copy} ${copied ? styles.copied : ""}`}
+          className={cn(
+            "inline-flex items-center justify-center w-8 h-8 shrink-0",
+            "rounded-[9px] text-outline",
+            "transition-[opacity,background-color,color] duration-[160ms] ease-[ease]",
+            "opacity-0 group-hover:opacity-100 focus-visible:opacity-100",
+            // Touch devices have no hover, so keep the control visible.
+            "[@media(hover:none)]:opacity-100",
+            copied
+              ? "opacity-100 text-success-text hover:bg-success-tint hover:text-success-text"
+              : "hover:bg-accent-tint hover:text-accent-text",
+          )}
           onClick={handleCopy}
           aria-label={copied ? `${label} copied` : `Copy ${label}`}
         >

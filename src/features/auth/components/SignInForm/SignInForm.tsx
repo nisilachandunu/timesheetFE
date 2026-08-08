@@ -6,7 +6,8 @@ import { Button, Divider, Icon, PasswordInput, TextInput, TextLink } from "@/com
 import { useSignInForm } from "../../hooks";
 import type { SignInCredentials } from "../../types";
 import { SsoButton } from "../SsoButton";
-import styles from "./SignInForm.module.css";
+import { stagger } from "../stagger";
+import { cn } from "@/lib/cn";
 
 export interface SignInFormProps {
   /** Overrides the default behaviour of routing to the dashboard. */
@@ -32,26 +33,50 @@ export function SignInForm({ onSubmit, onSsoSignIn }: SignInFormProps) {
   const isBusy = isSubmitting || isNavigating;
 
   return (
-    <div className={styles.wrapper}>
-      <div className={`${styles.stagger} ${styles.s1}`}>
-        <p className={styles.eyebrow}>
+    <div className="w-full max-w-sm mx-auto">
+      <div className={stagger(1)}>
+        <p
+          className={cn(
+            "flex items-center gap-2 mb-[clamp(10px,2vh,24px)]",
+            "text-label-sm font-semibold tracking-[0.12em] uppercase",
+            "text-on-surface-variant",
+          )}
+        >
           <Icon name="lock" size={16} />
           Secure Sign-In
         </p>
-        <h2 className={styles.title}>Welcome back</h2>
-        <p className={styles.subtitle}>Sign in to your account to continue</p>
+        <h2
+          className={cn(
+            "text-[clamp(1.5rem,min(2.2vw,3.6vh),2rem)] font-bold",
+            "tracking-[-0.02em] leading-[1.2] mb-2",
+          )}
+        >
+          Welcome back
+        </h2>
+        <p
+          className={cn(
+            "text-[clamp(0.875rem,1.8vh,1rem)] text-on-surface-variant",
+            "mb-[clamp(14px,2.8vh,32px)]",
+          )}
+        >
+          Sign in to your account to continue
+        </p>
       </div>
 
-      <div className={`${styles.stagger} ${styles.s2} ${styles.ssoSlot}`}>
+      <div className={cn(stagger(2), "mb-[clamp(10px,2.2vh,24px)]")}>
         <SsoButton onClick={onSsoSignIn} disabled={isBusy} />
       </div>
 
-      <Divider className={`${styles.stagger} ${styles.s3} ${styles.divider}`}>
+      <Divider className={cn(stagger(3), "mb-[clamp(10px,2.2vh,24px)]")}>
         or
       </Divider>
 
-      <form className={styles.form} onSubmit={handleSubmit} noValidate>
-        <div className={`${styles.stagger} ${styles.s4}`}>
+      <form
+        className="flex flex-col gap-[clamp(10px,1.8vh,16px)]"
+        onSubmit={handleSubmit}
+        noValidate
+      >
+        <div className={stagger(4)}>
           <TextInput
             id="email"
             name="email"
@@ -68,7 +93,7 @@ export function SignInForm({ onSubmit, onSsoSignIn }: SignInFormProps) {
           />
         </div>
 
-        <div className={`${styles.stagger} ${styles.s5}`}>
+        <div className={stagger(5)}>
           <PasswordInput
             id="password"
             name="password"
@@ -83,27 +108,38 @@ export function SignInForm({ onSubmit, onSsoSignIn }: SignInFormProps) {
           />
         </div>
 
-        <div className={`${styles.stagger} ${styles.s6} ${styles.formActions}`}>
+        <div className={cn(stagger(6), "flex items-center justify-end py-1 px-0")}>
           <TextLink href="/forgot-password">Forgot password?</TextLink>
         </div>
 
-        <div className={`${styles.stagger} ${styles.s7}`}>
+        <div className={stagger(7)}>
           <Button type="submit" loading={isBusy}>
             {isBusy ? "Signing in…" : "Sign In"}
           </Button>
         </div>
       </form>
 
-      <p className={`${styles.stagger} ${styles.s7} ${styles.encryptionNote}`}>
+      <p
+        className={cn(
+          stagger(7),
+          "flex items-center justify-center gap-2 mt-[clamp(10px,2.2vh,24px)]",
+          "text-label-xs font-semibold text-on-surface-variant",
+        )}
+      >
         <Icon name="shield_locked" size={14} />
         Protected by enterprise-grade encryption
       </p>
 
-      <div className={`${styles.stagger} ${styles.s7} ${styles.footer}`}>
-        <p className={styles.footerHelp}>
+      <div
+        className={cn(
+          stagger(7),
+          "mt-[clamp(16px,3.4vh,40px)] text-center text-on-surface-variant",
+        )}
+      >
+        <p className="text-label-sm font-semibold mb-2">
           Need help? <TextLink href="#">Contact IT Support</TextLink>
         </p>
-        <p className={styles.footerLegal}>
+        <p className="text-label-xs leading-[1.6]">
           By signing in, you agree to our{" "}
           <TextLink href="#" subtle>
             Terms of Service

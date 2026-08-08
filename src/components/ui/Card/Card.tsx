@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { Icon } from "../Icon";
-import styles from "./Card.module.css";
+import { cn } from "@/lib/cn";
 
 export interface CardProps {
   title?: string;
@@ -15,6 +15,11 @@ export interface CardProps {
   className?: string;
 }
 
+/**
+ * The card's gutter — clamp(18px,2.4vw,26px) — is repeated literally in each
+ * class below. Tailwind only generates utilities it can see as complete
+ * strings in the source, so composing them from a constant would emit nothing.
+ */
 export function Card({
   title,
   description,
@@ -27,29 +32,66 @@ export function Card({
   const hasHeader = Boolean(title || icon);
 
   return (
-    <section className={`${styles.card} ${className ?? ""}`}>
+    <section
+      className={cn(
+        "bg-surface-lowest border border-solid border-hairline",
+        "rounded-[18px] shadow-card overflow-hidden",
+        className,
+      )}
+    >
       {hasHeader && (
-        <header className={styles.header}>
+        <header className="flex items-start gap-[14px] p-[clamp(18px,2.4vw,26px)]">
           {icon && (
-            <span className={styles.iconTile}>
+            <span
+              className={cn(
+                "flex items-center justify-center w-10 h-10 shrink-0",
+                "rounded-[12px] bg-accent-tint text-accent-text",
+                "border border-solid border-accent-tint-border",
+              )}
+            >
               <Icon name={icon} size={21} weight={500} />
             </span>
           )}
-          <div className={styles.headingText}>
-            {title && <h2 className={styles.title}>{title}</h2>}
-            {description && <p className={styles.description}>{description}</p>}
+          <div className="min-w-0">
+            {title && (
+              <h2 className="text-[1.0625rem] font-bold tracking-[-0.015em] text-on-background">
+                {title}
+              </h2>
+            )}
+            {description && (
+              <p className="mt-0.5 text-sm leading-normal text-on-surface-variant">
+                {description}
+              </p>
+            )}
           </div>
-          {headerAside && <div className={styles.headerAside}>{headerAside}</div>}
+          {headerAside && <div className="ml-auto shrink-0">{headerAside}</div>}
         </header>
       )}
 
       {children && (
-        <div className={`${styles.body} ${hasHeader ? styles.divided : ""}`}>
+        <div
+          className={cn(
+            "pt-0 px-[clamp(18px,2.4vw,26px)] pb-[clamp(18px,2.4vw,26px)]",
+            // When a header is present the body sits under a hairline.
+            hasHeader &&
+              "pt-[clamp(18px,2.4vw,26px)] px-0 mx-[clamp(18px,2.4vw,26px)] border-t border-solid border-hairline-faint",
+          )}
+        >
           {children}
         </div>
       )}
 
-      {footer && <footer className={styles.footer}>{footer}</footer>}
+      {footer && (
+        <footer
+          className={cn(
+            "flex items-center justify-end gap-2.5",
+            "py-4 px-[clamp(18px,2.4vw,26px)]",
+            "bg-surface-low border-t border-solid border-hairline-faint",
+          )}
+        >
+          {footer}
+        </footer>
+      )}
     </section>
   );
 }

@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import styles from "./Divider.module.css";
+import { cn } from "@/lib/cn";
 
 export interface DividerProps {
   /** Optional label rendered between the two rules. */
@@ -8,11 +8,17 @@ export interface DividerProps {
 }
 
 export function Divider({ children, className }: DividerProps) {
+  const line = "flex-1 h-px bg-outline-variant";
+
   return (
-    <div className={`${styles.divider} ${className ?? ""}`}>
-      <span className={styles.line} />
-      {children && <span className={styles.text}>{children}</span>}
-      {children && <span className={styles.line} />}
+    <div className={cn("flex items-center gap-4", className)}>
+      <span className={line} />
+      {children && (
+        <span className="text-label-sm font-semibold tracking-wider uppercase text-on-surface-variant">
+          {children}
+        </span>
+      )}
+      {children && <span className={line} />}
     </div>
   );
 }

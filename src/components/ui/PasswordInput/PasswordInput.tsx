@@ -3,7 +3,6 @@
 import { forwardRef, useState, type InputHTMLAttributes } from "react";
 import { Icon } from "../Icon";
 import { TextInput } from "../TextInput";
-import styles from "./PasswordInput.module.css";
 
 export interface PasswordInputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "type"> {
@@ -25,7 +24,10 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
         trailingSlot={
           <button
             type="button"
-            className={styles.toggle}
+            className={
+              "flex items-center justify-center rounded-sm text-outline " +
+              "transition-colors duration-fast ease-[ease] hover:text-on-background"
+            }
             onClick={() => setVisible((prev) => !prev)}
             aria-label={visible ? "Hide password" : "Show password"}
           >

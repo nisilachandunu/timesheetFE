@@ -8,7 +8,18 @@ import type { Category, MainTaskOption, TaskRow } from "../../types";
 import { toISODate } from "../../utils";
 import { DateField } from "./DateField";
 import { MainTaskSelect } from "./MainTaskSelect";
-import styles from "./AddTaskModal.module.css";
+import { cn } from "@/lib/cn";
+
+const FIELD = "flex flex-col justify-center gap-1 min-w-0";
+const LABEL = "text-label-sm font-semibold text-on-surface-variant";
+
+const OPTION = cn(
+  "inline-flex items-center gap-[7px] h-[34px] px-[13px] rounded-[9px]",
+  "text-[0.8125rem] font-semibold text-on-surface-variant bg-surface-low",
+  "border-[1.5px] border-solid border-transparent",
+  "transition-[border-color,background-color,color,transform]",
+  "duration-[130ms] ease-[ease] hover:-translate-y-px",
+);
 
 export interface AddTaskModalProps {
   /** Which group the new row lands in — decides the default category. */
@@ -29,13 +40,22 @@ export interface AddTaskModalProps {
   }) => void;
 }
 
+/* Selected state borrows each category's colour from the grid's chips, so the
+   picker and the data it produces read as the same system. Spelled out per
+   category because Tailwind cannot see a computed class name. */
 const CATEGORY_META: Record<Category, { chipClass: string; hint: string }> = {
-  Billable: { chipClass: styles.optionBillable, hint: "Charged to the client" },
+  Billable: {
+    chipClass: "text-accent-text bg-accent-tint border-accent-tint-border",
+    hint: "Charged to the client",
+  },
   "Non-Billable": {
-    chipClass: styles.optionNonBillable,
+    chipClass: "text-on-background bg-hairline border-hairline-strong",
     hint: "Internal, not invoiced",
   },
-  Leave: { chipClass: styles.optionLeave, hint: "Casual, medical, or annual leave" },
+  Leave: {
+    chipClass: "text-success-text bg-success-tint border-success-tint-border",
+    hint: "Casual, medical, or annual leave",
+  },
 };
 
 /**
@@ -97,23 +117,41 @@ export function AddTaskModal({
   };
 
   return (
-    <div className={styles.backdrop} role="presentation">
+    <div className={cn(
+        "fixed inset-0 z-50 flex items-center justify-center p-4",
+        "bg-[rgba(11,8,28,0.5)] backdrop-blur-[3px]",
+        "animate-backdrop-in motion-reduce:animate-none",
+      )} role="presentation">
       <div
         ref={panelRef}
-        className={styles.panel}
+        className={cn(
+          "w-full max-w-[440px] max-h-[min(90vh,600px)] overflow-y-auto",
+          "rounded-[18px] bg-surface-lowest",
+          "border border-solid border-hairline shadow-panel",
+          "origin-center animate-panel-in motion-reduce:animate-none",
+        )}
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
       >
-        <div className={styles.header}>
-          <span className={styles.headerIcon} aria-hidden="true">
+        <div className={cn(
+            "flex items-start gap-3 pt-[18px] px-5 pb-3.5",
+            "border-b border-solid border-hairline",
+            "max-[480px]:pt-4 max-[480px]:px-4 max-[480px]:pb-3",
+          )}>
+          <span className={cn(
+              "flex items-center justify-center w-10 h-10 shrink-0 rounded-[12px]",
+              "bg-primary",
+              "bg-[linear-gradient(140deg,rgba(255,255,255,0.32)_0%,transparent_62%)]",
+              "text-on-primary shadow-[0_8px_18px_-8px_var(--color-accent-tint-border)]",
+            )} aria-hidden="true">
             <Icon name="add_task" size={22} weight={500} />
           </span>
-          <div className={styles.headerText}>
-            <h2 id={titleId} className={styles.title}>
+          <div className="flex-1 min-w-0 pt-0.5">
+            <h2 id={titleId} className="text-[1.0625rem] font-bold tracking-[-0.015em] text-on-background">
               Add task
             </h2>
-            <p className={styles.subtitle}>
+            <p className="mt-[3px] text-[0.8125rem] leading-normal text-on-surface-variant">
               {projectName
                 ? `A new task under ${projectName}, ready to log hours against.`
                 : "A new non-project task, ready to log hours against."}
@@ -121,7 +159,12 @@ export function AddTaskModal({
           </div>
           <button
             type="button"
-            className={styles.close}
+            className={cn(
+              "inline-flex items-center justify-center w-8 h-8 shrink-0",
+              "-mt-1 -mr-1 rounded-[9px] text-outline",
+              "transition-[background-color,color] duration-[130ms] ease-[ease]",
+              "hover:bg-hairline-faint hover:text-on-background",
+            )}
             onClick={onClose}
             aria-label="Close"
           >
@@ -129,20 +172,27 @@ export function AddTaskModal({
           </button>
         </div>
 
-        <form className={styles.body} onSubmit={handleSubmit}>
+        <form className={cn(
+            "flex flex-col gap-3.5 pt-[18px] px-5 pb-5",
+            "max-[480px]:pt-3.5 max-[480px]:px-4 max-[480px]:pb-4",
+          )} onSubmit={handleSubmit}>
           {isProject && (
-            <div className={styles.projectRow}>
-              <div className={styles.field}>
-                <span className={styles.label}>Project</span>
-                <span className={styles.projectTag}>
+            <div className="grid grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] gap-3 max-[480px]:grid-cols-1">
+              <div className={FIELD}>
+                <span className={LABEL}>Project</span>
+                <span className={cn(
+                  "inline-flex items-center gap-1.5 self-start h-11 px-3",
+                  "rounded-md text-[0.8125rem] font-semibold",
+                  "text-accent-text bg-accent-tint",
+                )}>
                   <Icon name="folder" size={15} />
                   {projectName}
                 </span>
               </div>
 
-              <div className={styles.field}>
-                <label className={styles.label} htmlFor={mainTaskFieldId}>
-                  Main task<span className={styles.required}>*</span>
+              <div className={FIELD}>
+                <label className={LABEL} htmlFor={mainTaskFieldId}>
+                  Main task<span className="ml-[3px] text-error">*</span>
                 </label>
                 <MainTaskSelect
                   id={mainTaskFieldId}
@@ -165,11 +215,11 @@ export function AddTaskModal({
             onChange={(event) => setName(event.target.value)}
           />
 
-          <div className={styles.field}>
-            <span className={styles.label}>
-              Category<span className={styles.required}>*</span>
+          <div className={FIELD}>
+            <span className={LABEL}>
+              Category<span className="ml-[3px] text-error">*</span>
             </span>
-            <div className={styles.options} role="radiogroup" aria-label="Category">
+            <div className="flex flex-wrap gap-2" role="radiogroup" aria-label="Category">
               {CATEGORIES.map((option) => {
                 const meta = CATEGORY_META[option];
                 const selected = option === category;
@@ -180,12 +230,16 @@ export function AddTaskModal({
                     role="radio"
                     aria-checked={selected}
                     title={meta.hint}
-                    className={`${styles.option} ${meta.chipClass} ${
-                      selected ? styles.optionSelected : ""
-                    }`}
+                    className={cn(OPTION, selected && meta.chipClass)}
                     onClick={() => setCategory(option)}
                   >
-                    <span className={styles.optionDot} aria-hidden="true" />
+                    <span
+                      className={cn(
+                        "w-[7px] h-[7px] shrink-0 rounded-full bg-current",
+                        selected ? "opacity-100" : "opacity-50",
+                      )}
+                      aria-hidden="true"
+                    />
                     {option}
                   </button>
                 );
@@ -193,7 +247,7 @@ export function AddTaskModal({
             </div>
           </div>
 
-          <div className={styles.fieldRow}>
+          <div className="grid grid-cols-2 gap-3 max-[480px]:grid-cols-1">
             <DateField
               id={startDateId}
               label="Start date"
@@ -212,7 +266,11 @@ export function AddTaskModal({
             />
           </div>
 
-          <div className={styles.actions}>
+          <div className={cn(
+              "flex justify-end gap-2.5 mt-0.5 pt-3.5",
+              "border-t border-solid border-hairline",
+              "max-[480px]:flex-col-reverse max-[480px]:[&>*]:w-full",
+            )}>
             <Button variant="outline" fullWidth={false} onClick={onClose}>
               Cancel
             </Button>

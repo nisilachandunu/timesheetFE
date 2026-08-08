@@ -2,7 +2,7 @@
 
 import { useState, type KeyboardEvent } from "react";
 import { MAX_HOURS_PER_DAY, formatHours, parseHours } from "../../utils";
-import styles from "./HourCell.module.css";
+import { cn } from "@/lib/cn";
 
 export interface HourCellProps {
   value: number;
@@ -80,20 +80,32 @@ export function HourCell({
     }
   };
 
-  const classes = [
-    styles.input,
-    weekend ? styles.weekend : "",
-    value > 0 ? styles.filled : "",
-  ]
-    .filter(Boolean)
-    .join(" ");
-
   return (
     <input
       ref={registerRef}
       type="text"
       inputMode="decimal"
-      className={classes}
+      className={cn(
+        // Bare by default: a filled cell is signalled by the number itself,
+        // not by a box around it. Tinting every entered cell turned the grid
+        // into a wall of boxes and buried the values.
+        "w-full h-9 px-1 text-center text-sm font-semibold tabular-nums",
+        "tracking-[-0.01em] text-on-background bg-transparent rounded-[8px]",
+        "border border-solid border-transparent",
+        "transition-[background-color,border-color,box-shadow] duration-[130ms] ease-[ease]",
+        // Empty cells recede so the eye lands only on days with hours.
+        "placeholder:text-outline placeholder:font-normal placeholder:opacity-40",
+        "enabled:hover:border-hairline-strong",
+        "focus:outline-none focus:bg-surface-lowest focus:border-primary",
+        "focus:shadow-[0_0_0_3px_var(--color-focus-ring)]",
+        "disabled:cursor-default disabled:text-on-surface-variant",
+        "disabled:bg-transparent disabled:border-transparent",
+        value > 0 && "text-on-background",
+        // Weekend hours are real but rarely the point, so they sit a step
+        // back. Listed after `filled` because the original rule order let
+        // .weekend win over .filled for a weekend cell that has hours.
+        weekend && "text-on-surface-variant font-medium",
+      )}
       value={draft ?? formatHours(value)}
       placeholder="–"
       aria-label={label}

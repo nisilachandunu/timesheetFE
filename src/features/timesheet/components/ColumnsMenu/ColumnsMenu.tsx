@@ -6,7 +6,20 @@ import { useDismissable } from "@/hooks";
 import { COLUMN_GROUPS, DAY_KEYS, WEEKEND_KEYS } from "../../constants";
 import type { ColumnGroupKey, ColumnLayout } from "../../types";
 import { formatWeekday } from "../../utils";
-import styles from "./ColumnsMenu.module.css";
+import { cn } from "@/lib/cn";
+
+const CHECKBOX =
+  "w-[15px] h-[15px] shrink-0 accent-primary cursor-pointer disabled:cursor-default";
+
+/* Up/down read as left/right once the list is understood as column order —
+   the aria-labels say left/right so assistive tech is unambiguous. */
+const MOVE = cn(
+  "inline-flex items-center justify-center w-6 h-6 rounded-[6px]",
+  "text-on-surface-variant",
+  "transition-[background-color,color] duration-[140ms] ease-[ease]",
+  "enabled:hover:bg-accent-tint enabled:hover:text-accent-text",
+  "disabled:opacity-30 disabled:cursor-default",
+);
 
 export interface ColumnsMenuProps {
   layout: ColumnLayout;
@@ -58,26 +71,54 @@ export function ColumnsMenu({
   };
 
   return (
-    <div className={styles.root} ref={rootRef}>
+    <div className="relative" ref={rootRef}>
       <button
         type="button"
-        className={`${styles.trigger} ${isOpen ? styles.triggerOpen : ""}`}
+        className={cn(
+          "inline-flex items-center gap-[7px] h-9 px-3 rounded-[8px]",
+          "text-[0.8125rem] font-semibold text-on-surface-variant",
+          "bg-surface-lowest border border-solid border-hairline",
+          "transition-[background-color,border-color,color] duration-fast ease-[ease]",
+          "hover:text-on-background hover:border-hairline-strong hover:bg-surface-low",
+          isOpen &&
+            "text-on-background border-hairline-strong bg-surface-low",
+        )}
         onClick={() => setIsOpen((open) => !open)}
         aria-expanded={isOpen}
         aria-haspopup="dialog"
       >
         <Icon name="view_column" size={18} />
         Columns
-        {hiddenCount > 0 && <span className={styles.badge}>{hiddenCount}</span>}
+        {hiddenCount > 0 && <span
+            className={cn(
+              "inline-flex items-center justify-center min-w-[17px] h-[17px]",
+              "px-[5px] rounded-[5px] text-[0.625rem] font-bold",
+              "text-on-primary bg-primary",
+            )}
+          >
+            {hiddenCount}
+          </span>}
       </button>
 
       {isOpen && (
-        <div className={styles.menu} role="dialog" aria-label="Customise columns">
-          <div className={styles.menuHead}>
-            <span className={styles.menuTitle}>Columns</span>
+        <div
+          className={cn(
+            "absolute top-[calc(100%+8px)] right-0 z-40 w-[288px] p-3",
+            "rounded-[14px] bg-surface-lowest",
+            "border border-solid border-hairline-strong shadow-panel",
+            "origin-top-right animate-menu-in-columns",
+          )}
+          role="dialog"
+          aria-label="Customise columns"
+        >
+          <div className="flex items-center justify-between gap-2.5">
+            <span className="text-[0.8125rem] font-bold text-on-background">Columns</span>
             <button
               type="button"
-              className={styles.reset}
+              className={cn(
+                "text-xs font-semibold text-accent-text rounded-sm",
+                "disabled:text-outline disabled:cursor-default",
+              )}
               onClick={onReset}
               disabled={!isCustomised}
             >
@@ -85,38 +126,46 @@ export function ColumnsMenu({
             </button>
           </div>
 
-          <p className={styles.hint}>
+          <p className="my-1.5 mb-2.5 text-[0.6875rem] leading-[1.45] text-on-surface-variant">
             Drag a column header to reorder, or drag its edge to resize.
           </p>
 
-          <ul className={styles.list}>
+          <ul className="flex flex-col gap-px list-none">
             {layout.order.map((key) => {
               const def = COLUMN_GROUPS[key];
               const isHidden = hidden.has(key);
               const movableIndex = movable.indexOf(key);
 
               return (
-                <li key={key} className={styles.group}>
-                  <div className={styles.row}>
-                    <label className={styles.toggle}>
+                <li key={key} className="flex flex-col">
+                  <div
+                    className={cn(
+                      "flex items-center gap-2 rounded-[8px] py-0.5 pr-0.5 pl-1.5",
+                      "transition-colors duration-[140ms] ease-[ease]",
+                      "hover:bg-surface-low",
+                    )}
+                  >
+                    <label className="flex items-center gap-[9px] flex-1 min-w-0 py-[5px] text-[0.8125rem] cursor-pointer">
                       <input
                         type="checkbox"
-                        className={styles.checkbox}
+                        className={CHECKBOX}
                         checked={!isHidden}
                         disabled={def.pinned}
                         onChange={() => onToggleColumn(key)}
                       />
-                      <span className={styles.name}>
+                      <span className="overflow-hidden text-ellipsis whitespace-nowrap text-on-background">
                         {key === "days" ? "Day columns" : def.label}
                       </span>
-                      {def.pinned && <span className={styles.pinned}>Pinned</span>}
+                      {def.pinned && <span className="shrink-0 text-[0.625rem] font-semibold tracking-wider uppercase text-outline">
+                          Pinned
+                        </span>}
                     </label>
 
                     {!def.pinned && (
-                      <span className={styles.moves}>
+                      <span className="inline-flex shrink-0">
                         <button
                           type="button"
-                          className={styles.move}
+                          className={MOVE}
                           onClick={() => onMoveColumn(key, -1)}
                           disabled={movableIndex <= 0}
                           aria-label={`Move ${def.label} left`}
@@ -125,7 +174,7 @@ export function ColumnsMenu({
                         </button>
                         <button
                           type="button"
-                          className={styles.move}
+                          className={MOVE}
                           onClick={() => onMoveColumn(key, 1)}
                           disabled={movableIndex === movable.length - 1}
                           aria-label={`Move ${def.label} right`}
@@ -138,14 +187,20 @@ export function ColumnsMenu({
 
                   {/* Individual days nest under the block they belong to. */}
                   {key === "days" && !isHidden && (
-                    <div className={styles.days}>
+                    <div
+                      className={cn(
+                        "flex flex-wrap gap-y-1 gap-x-3 my-0.5 mb-1.5 py-2 px-2.5",
+                        "rounded-[9px] bg-surface-low",
+                        "border border-solid border-hairline-faint",
+                      )}
+                    >
                       {dates.map((date, index) => {
                         const dayKey = `day-${index}`;
                         return (
-                          <label key={dayKey} className={styles.day}>
+                          <label key={dayKey} className="inline-flex items-center gap-1.5 text-xs text-on-surface-variant cursor-pointer">
                             <input
                               type="checkbox"
-                              className={styles.checkbox}
+                              className={CHECKBOX}
                               checked={!hidden.has(dayKey)}
                               onChange={() => onToggleColumn(dayKey)}
                             />
@@ -155,7 +210,7 @@ export function ColumnsMenu({
                       })}
                       <button
                         type="button"
-                        className={styles.quick}
+                        className="basis-full mt-0.5 text-left text-[0.6875rem] font-semibold text-accent-text"
                         onClick={toggleWeekends}
                       >
                         {weekendsHidden ? "Show weekends" : "Hide weekends"}
