@@ -64,6 +64,7 @@ const config: Config = {
 
         error: "var(--color-error)",
         "on-error": "var(--color-on-error)",
+        "error-ring": "var(--color-error-ring)",
         success: "var(--color-success)",
         "success-solid": "var(--color-success-solid)",
         "success-text": "var(--color-success-text)",

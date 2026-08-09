@@ -1,9 +1,9 @@
+/* Vendor pseudo-elements and vendor-driven states only — everything that
+   utilities can express lives on the component. */
+
 /* The bare browser calendar glyph reads like unstyled default UI next to
    this app's custom icon set — recolour it to match --color-outline and
-   give it a hover target so it feels like part of the same design system.
-
-   Kept as plain CSS: a vendor pseudo-element that also needs a theme-driven
-   filter variable is not something utilities express legibly. */
+   give it a hover target so it feels like part of the same design system. */
 
 .input[type="date"]::-webkit-calendar-picker-indicator {
   width: 18px;
@@ -29,4 +29,28 @@
 
 :root[data-theme="dark"] .input[type="date"] {
   --date-icon-filter: invert(1) brightness(1.4);
+}
+
+/* Autofill. Chrome paints its own pale-yellow fill that `background-color`
+   cannot override — on dark it lands as a bright slab with near-invisible
+   text. An inset shadow large enough to cover the field is the only way to
+   repaint it, and -webkit-text-fill-color the only way to recolour the text.
+
+   Because that hijacks box-shadow, the focus ring has to be restated here;
+   otherwise focusing an autofilled field would drop its glow. */
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover {
+  -webkit-box-shadow: inset 0 0 0 1000px var(--color-surface-container-lowest);
+  box-shadow: inset 0 0 0 1000px var(--color-surface-container-lowest);
+  -webkit-text-fill-color: var(--color-on-background);
+  caret-color: var(--color-on-background);
+}
+
+.input:-webkit-autofill:focus {
+  -webkit-box-shadow:
+    inset 0 0 0 1000px var(--color-surface-container-lowest),
+    0 0 0 3px var(--color-focus-ring);
+  box-shadow:
+    inset 0 0 0 1000px var(--color-surface-container-lowest),
+    0 0 0 3px var(--color-focus-ring);
 }

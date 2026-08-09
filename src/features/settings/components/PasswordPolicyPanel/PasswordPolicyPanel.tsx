@@ -37,7 +37,7 @@ export function PasswordPolicyPanel({ value, strength }: PasswordPolicyPanelProp
     <aside
       className={cn(
         "flex flex-col gap-4 p-[18px] rounded-[14px]",
-        "bg-surface-low border border-solid border-hairline-faint",
+        "bg-surface-low",
       )}
     >
       <h3
@@ -88,7 +88,7 @@ export function PasswordPolicyPanel({ value, strength }: PasswordPolicyPanelProp
         })}
       </ul>
 
-      <div className="pt-3.5 border-t border-solid border-hairline-faint">
+      <div className="pt-3.5">
         <div className="flex items-baseline justify-between gap-2.5 mb-2">
           <span className="text-xs font-semibold text-on-surface-variant">
             Password strength

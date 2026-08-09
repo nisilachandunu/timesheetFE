@@ -44,9 +44,7 @@ export function DetailField({ label, value, icon, copyable = false }: DetailFiel
     <div
       className={cn(
         "group flex items-center gap-3 py-3 px-3.5 rounded-lg",
-        "bg-surface-low border border-solid border-hairline-faint",
-        "transition-[border-color] duration-[180ms] ease-[ease]",
-        "hover:border-hairline-strong",
+        "bg-surface-low",
       )}
     >
       {icon && (

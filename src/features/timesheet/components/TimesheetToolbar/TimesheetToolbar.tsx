@@ -10,7 +10,7 @@ const WEEK_TARGET = STANDARD_DAY_HOURS * 5;
 
 const NAV_BUTTON = cn(
   "inline-flex items-center justify-center w-9 h-9 shrink-0 rounded-[8px]",
-  "text-on-surface-variant border border-solid border-hairline",
+  "text-on-surface-variant",
   // Per-property easings (transform eases differently from the colours), so
   // the shorthand is spelled out rather than split into transition-* utilities.
   "[transition:background-color_var(--duration-fast)_ease,border-color_var(--duration-fast)_ease,color_var(--duration-fast)_ease,transform_var(--duration-fast)_var(--ease-out-expo)]",
@@ -47,7 +47,6 @@ export function TimesheetToolbar({
         // squeezed. The panel owns the border, radius and shadow.
         "flex items-center justify-between flex-wrap shrink-0 gap-3.5",
         "py-[13px] px-3.5 bg-surface-lowest",
-        "border-b border-solid border-hairline",
         "animate-toolbar-entrance motion-reduce:animate-none",
       )}
     >
@@ -75,7 +74,6 @@ export function TimesheetToolbar({
                 "shrink-0 py-[3px] px-2 rounded-[6px] text-[0.625rem] font-bold",
                 "tracking-wider uppercase whitespace-nowrap",
                 "text-accent-text bg-accent-tint",
-                "border border-solid border-accent-tint-border",
                 "animate-chip-pop motion-reduce:animate-none",
               )}
             >

@@ -134,7 +134,7 @@ export function OtpInput({
               SLOT,
               char.trim() && "border-primary bg-accent-tint-faint",
               invalid &&
-                "border-error focus:shadow-[0_0_0_3px_rgba(186,26,26,0.15)]",
+                "border-error focus:shadow-[0_0_0_3px_var(--color-error-ring)]",
             )}
             type="text"
             inputMode="numeric"

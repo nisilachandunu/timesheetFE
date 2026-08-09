@@ -113,14 +113,14 @@ export function TimesheetScreen() {
            grid gets a high-fidelity skeleton rather than a blank state on first paint. */
         <div className={cn(
           "relative flex flex-col min-h-0 rounded-[14px] overflow-hidden",
-          "bg-surface-lowest border border-solid border-hairline shadow-card",
+          "bg-surface-lowest shadow-card",
           // Holographic shimmer sweeping the whole skeleton.
           "after:content-[''] after:absolute after:inset-0 after:-translate-x-full",
           "after:bg-[linear-gradient(90deg,transparent_0%,rgba(255,255,255,0.03)_25%,rgba(106,57,219,0.08)_50%,rgba(255,255,255,0.05)_75%,transparent_100%)]",
           "after:animate-shimmer-wave motion-reduce:after:animate-none",
           "after:pointer-events-none after:z-[5]",
         )} aria-hidden="true">
-          <div className={"flex items-center justify-between p-3.5 bg-surface-lowest border-b border-solid border-hairline"}>
+          <div className={"flex items-center justify-between p-3.5 bg-surface-lowest"}>
             <div className={"flex items-center gap-2"}>
               <div className={cn("w-[34px] h-[34px] rounded-[8px]", SKEL)} />
               <div className={cn("w-[140px] h-5 rounded-[6px] mx-1", SKEL)} />
@@ -151,25 +151,25 @@ export function TimesheetScreen() {
             <div className={"flex items-center h-10 px-3.5 gap-3 border-b border-solid border-hairline-faint"}>
               <div className={cn("w-[180px] h-3.5 ml-6 rounded-[4px] shrink-0", SKEL)} />
               <div className={"flex items-center flex-1 gap-3"}>
-                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low border border-solid border-hairline"} />
-                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low border border-solid border-hairline"} />
-                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low border border-solid border-hairline"} />
-                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low border border-solid border-hairline"} />
-                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low border border-solid border-hairline"} />
-                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low border border-solid border-hairline"} />
-                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low border border-solid border-hairline"} />
+                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low"} />
+                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low"} />
+                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low"} />
+                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low"} />
+                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low"} />
+                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low"} />
+                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low"} />
               </div>
             </div>
             <div className={"flex items-center h-10 px-3.5 gap-3 border-b border-solid border-hairline-faint"}>
               <div className={cn("w-[130px] h-3.5 ml-6 rounded-[4px] shrink-0", SKEL)} />
               <div className={"flex items-center flex-1 gap-3"}>
-                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low border border-solid border-hairline"} />
-                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low border border-solid border-hairline"} />
-                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low border border-solid border-hairline"} />
-                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low border border-solid border-hairline"} />
-                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low border border-solid border-hairline"} />
-                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low border border-solid border-hairline"} />
-                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low border border-solid border-hairline"} />
+                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low"} />
+                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low"} />
+                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low"} />
+                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low"} />
+                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low"} />
+                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low"} />
+                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low"} />
               </div>
             </div>
             <div className={"flex items-center h-9 px-3.5 gap-2.5 bg-accent-tint-faint border-t border-b border-solid border-accent-tint-border"}>
@@ -179,13 +179,13 @@ export function TimesheetScreen() {
             <div className={"flex items-center h-10 px-3.5 gap-3 border-b border-solid border-hairline-faint"}>
               <div className={cn("w-[180px] h-3.5 ml-6 rounded-[4px] shrink-0", SKEL)} />
               <div className={"flex items-center flex-1 gap-3"}>
-                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low border border-solid border-hairline"} />
-                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low border border-solid border-hairline"} />
-                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low border border-solid border-hairline"} />
-                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low border border-solid border-hairline"} />
-                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low border border-solid border-hairline"} />
-                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low border border-solid border-hairline"} />
-                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low border border-solid border-hairline"} />
+                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low"} />
+                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low"} />
+                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low"} />
+                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low"} />
+                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low"} />
+                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low"} />
+                <div className={"flex-1 h-6 rounded-[6px] bg-surface-low"} />
               </div>
             </div>
           </div>
@@ -197,7 +197,7 @@ export function TimesheetScreen() {
           // One container holds the toolbar, banner, grid and hint as
           // horizontal bands, so the screen reads as a single object.
           "relative flex flex-col min-h-0 rounded-[14px] overflow-hidden",
-          "bg-surface-lowest border border-solid border-hairline",
+          "bg-surface-lowest",
           "shadow-[0_1px_3px_rgba(0,0,0,0.03),0_12px_28px_-8px_rgba(0,0,0,0.05),0_0_0_1px_var(--color-hairline)]",
           "animate-panel-entrance motion-reduce:animate-none",
           // Laser light ray sweeping the top edge on load.
@@ -228,7 +228,6 @@ export function TimesheetScreen() {
             <div className={cn(
             "flex items-center shrink-0 gap-2.5 py-[11px] px-3.5",
             "text-[0.8125rem] text-on-surface-variant bg-accent-tint-faint",
-            "border-b border-solid border-hairline",
             "max-[720px]:flex-wrap",
             "[&>span:first-of-type]:flex-1 [&>span:first-of-type]:min-w-0",
           )} role="status">
@@ -258,7 +257,6 @@ export function TimesheetScreen() {
           <p className={cn(
             "flex items-center shrink-0 gap-[7px] py-2.5 px-3.5",
             "text-xs text-outline bg-surface-lowest",
-            "border-t border-solid border-hairline",
             "[&_code]:py-px [&_code]:px-[5px] [&_code]:rounded-[5px]",
             // The project's own stack, not Tailwind's default `font-mono`.
             "[&_code]:[font-family:ui-monospace,'SFMono-Regular','Consolas',monospace]",

@@ -127,7 +127,7 @@ export function AddTaskModal({
         className={cn(
           "w-full max-w-[440px] max-h-[min(90vh,600px)] overflow-y-auto",
           "rounded-[18px] bg-surface-lowest",
-          "border border-solid border-hairline shadow-panel",
+          "shadow-panel",
           "origin-center animate-panel-in motion-reduce:animate-none",
         )}
         role="dialog"

@@ -33,7 +33,6 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
         "relative z-20 flex flex-col shrink-0 w-[268px] h-full",
         "pt-5 px-3.5 pb-3.5 overflow-visible text-rail-text-muted",
         RAIL_BACKGROUND,
-        "border-r border-solid border-rail-border",
         "transition-[width,padding] duration-[280ms] ease-out-expo",
         "motion-reduce:transition-none",
         // The global focus ring is brand-dark and vanishes on this surface.
@@ -79,7 +78,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
           className={cn(
             "hidden lg:inline-flex items-center justify-center shrink-0",
             "w-7 h-7 ml-auto rounded-[9px] text-rail-text-dim",
-            "bg-rail-raised border border-solid border-rail-border",
+            "bg-rail-raised",
             "transition-[background-color,color,border-color] duration-[180ms] ease-[ease]",
             "hover:bg-rail-hover hover:border-hairline-strong hover:text-rail-text",
             isCollapsed && "lg:ml-0",
@@ -149,7 +148,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
         ))}
       </nav>
 
-      <div className="shrink-0 pt-3.5 mt-3.5 border-t border-solid border-rail-border">
+      <div className="shrink-0 pt-3.5 mt-3.5">
         <ProfileMenu user={CURRENT_USER} collapsed={isCollapsed} onNavigate={onClose} />
       </div>
     </aside>

@@ -37,7 +37,7 @@ export function DashboardShell({ children }: DashboardShellProps) {
         <header
           className={cn(
             "hidden max-lg:flex items-center gap-3 shrink-0 py-3 px-4",
-            "bg-surface-lowest border-b border-solid border-outline-variant",
+            "bg-surface-lowest",
           )}
         >
           <button

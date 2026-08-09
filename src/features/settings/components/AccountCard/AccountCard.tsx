@@ -33,7 +33,7 @@ export function AccountCard({ user }: AccountCardProps) {
       <p
         className={cn(
           "flex items-center gap-2 mt-3.5 py-[11px] px-[13px] rounded-[11px]",
-          "bg-accent-tint-faint border border-solid border-accent-tint-border",
+          "bg-accent-tint-faint",
           "text-[0.8125rem] text-on-surface-variant",
         )}
       >

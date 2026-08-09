@@ -33,7 +33,7 @@ export function ProfileHero({ user }: ProfileHeroProps) {
     <section
       className={cn(
         "relative rounded-[20px] overflow-hidden bg-surface-lowest",
-        "border border-solid border-hairline shadow-panel",
+        "shadow-panel",
       )}
     >
       <div className={COVER} aria-hidden="true" />

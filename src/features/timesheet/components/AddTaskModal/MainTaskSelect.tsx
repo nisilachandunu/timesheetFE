@@ -13,8 +13,11 @@ const TRIGGER = cn(
   "group flex items-center justify-between gap-2 w-full h-11 px-4",
   "border border-solid border-outline-variant rounded-md",
   "bg-surface-lowest text-body-md text-left",
-  "transition-[border-color,box-shadow] duration-fast ease-[ease]",
-  "hover:border-outline",
+  "transition-[border-color,box-shadow] duration-base ease-out-expo",
+  // Violet edge + bloom, matching TextInput's hover. The bloom stands down
+  // while the popover is open so it cannot displace the ring.
+  "hover:border-primary",
+  "[&:hover:not([aria-expanded='true'])]:shadow-focus-outline",
   "aria-expanded:border-primary",
   "aria-expanded:shadow-[0_0_0_3px_var(--color-focus-ring)]",
 );

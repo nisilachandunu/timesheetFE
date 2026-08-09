@@ -59,6 +59,8 @@
   /* Status */
   --color-error: #ba1a1a;
   --color-on-error: #ffffff;
+  /* Error counterpart to --color-focus-ring, for invalid fields. */
+  --color-error-ring: rgba(186, 26, 26, 0.15);
   --color-success: #22c55e;
   --color-success-solid: #16a34a;
   --color-success-text: #15803d;
@@ -200,6 +202,7 @@
 
   --color-error: #ffb4ab;
   --color-on-error: #690005;
+  --color-error-ring: rgba(255, 180, 171, 0.26);
   --color-success-solid: #22c55e;
   --color-success-text: #5ee596;
   --color-success-tint: rgba(34, 197, 94, 0.14);
@@ -245,6 +248,20 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+
+  /* Preflight is disabled (see tailwind.config.ts) and this is the one part of
+     it the theme cannot do without: every `border-*` utility is written
+     assuming borders start at zero width.
+
+     `border-style` is what activates a border, and the UA default width is
+     `medium` (~3px). So `border-t border-solid` sets the style on all four
+     sides while only giving the top a width — leaving the other three at the
+     UA's 3px. A single hairline above a footer renders as a 3px box around it.
+     Zeroing the width here is what makes the side-specific utilities mean what
+     they say. Matches Tailwind's own preflight. */
+  border-width: 0;
+  border-style: solid;
+  border-color: currentColor;
 }
 
 html,
@@ -269,7 +286,9 @@ a {
 }
 
 button,
-input {
+input,
+textarea,
+select {
   font: inherit;
   color: inherit;
 }
@@ -277,10 +296,24 @@ input {
 button {
   cursor: pointer;
   background: none;
-  border: none;
 }
 
-:focus-visible {
+/* Borders are already zeroed by the reset above; what remains is the rest of
+   the native chrome browsers paint on form controls — the inset background
+   and, on WebKit, a baked-in corner radius that ignores border-radius. */
+input,
+textarea,
+select {
+  background: none;
+  border-radius: 0;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* input/textarea/select define their own focus glow (focus:outline-none +
+   a soft box-shadow ring); this generic outline would otherwise win the
+   cascade since it's declared outside Tailwind's layers. */
+:focus-visible:not(input, textarea, select) {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
 }

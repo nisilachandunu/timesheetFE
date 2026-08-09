@@ -59,7 +59,7 @@ export function ChangePasswordCard({ onSubmit }: ChangePasswordCardProps) {
           <p
             className={cn(
               "flex items-center gap-[9px] mb-[18px] py-3 px-3.5 rounded-xl",
-              "bg-success-tint border border-solid border-success-tint-border",
+              "bg-success-tint",
               "text-sm font-semibold text-success-text",
             )}
             role="status"

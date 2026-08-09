@@ -77,7 +77,7 @@ export function ColumnsMenu({
         className={cn(
           "inline-flex items-center gap-[7px] h-9 px-3 rounded-[8px]",
           "text-[0.8125rem] font-semibold text-on-surface-variant",
-          "bg-surface-lowest border border-solid border-hairline",
+          "bg-surface-lowest",
           "transition-[background-color,border-color,color] duration-fast ease-[ease]",
           "hover:text-on-background hover:border-hairline-strong hover:bg-surface-low",
           isOpen &&
@@ -105,7 +105,7 @@ export function ColumnsMenu({
           className={cn(
             "absolute top-[calc(100%+8px)] right-0 z-40 w-[288px] p-3",
             "rounded-[14px] bg-surface-lowest",
-            "border border-solid border-hairline-strong shadow-panel",
+            "shadow-panel",
             "origin-top-right animate-menu-in-columns",
           )}
           role="dialog"
@@ -191,7 +191,6 @@ export function ColumnsMenu({
                       className={cn(
                         "flex flex-wrap gap-y-1 gap-x-3 my-0.5 mb-1.5 py-2 px-2.5",
                         "rounded-[9px] bg-surface-low",
-                        "border border-solid border-hairline-faint",
                       )}
                     >
                       {dates.map((date, index) => {

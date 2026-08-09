@@ -21,7 +21,7 @@ export function PageHeader({ title, description, actions }: PageHeaderProps) {
         // flex-shrink-0: never squeezed when the page it heads is a
         // full-height flex column.
         "flex items-center shrink-0 gap-3 pb-3",
-        "border-b border-solid border-outline-variant",
+        "border-b-0",
         "animate-header-entrance motion-reduce:animate-none",
         // Narrow enough that title and actions can no longer share a line.
         "max-[720px]:items-start max-[720px]:flex-wrap",
