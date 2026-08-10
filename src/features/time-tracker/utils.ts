@@ -35,6 +35,20 @@ export function formatDuration(ms: number): string {
   return `${Math.floor(minutes / 60)}:${`${minutes % 60}`.padStart(2, "0")}`;
 }
 
+// IDLE DETECTION (disabled) — its only callers were the idle dialog and control.
+// /**
+//  * "12 min", "1 h 05 min", "2 h" — for prose, where "0:12" reads as a clock time
+//  * rather than as a length of time.
+//  */
+// export function formatHumanDuration(ms: number): string {
+//   const minutes = Math.max(0, Math.round(ms / MINUTE));
+//   const hours = Math.floor(minutes / 60);
+//   const rest = minutes % 60;
+//   if (hours === 0) return `${rest} min`;
+//   if (rest === 0) return `${hours} h`;
+//   return `${hours} h ${`${rest}`.padStart(2, "0")} min`;
+// }
+
 /**
  * Parses a duration the way people type one into a timesheet: "2:30", "2.5",
  * "2,5" and "150m" all mean the same thing. Returns null when the input is not

@@ -56,6 +56,16 @@ export interface EntryDraft {
  */
 export type TrackerMode = "timer" | "manual";
 
+// IDLE DETECTION (disabled) — see ./hooks/useIdleDetection.ts
+// /**
+//  * A stretch the machine was idle for while a timer ran, in epoch milliseconds.
+//  * Reported once, on the return to activity — see `useIdleDetection`.
+//  */
+// export interface IdleWindow {
+//   from: number;
+//   to: number;
+// }
+
 /** A day's worth of entries, newest first, as the list renders them. */
 export interface DayGroup {
   /** ISO yyyy-mm-dd — stable across re-renders, unlike a Date. */

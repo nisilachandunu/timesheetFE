@@ -174,6 +174,53 @@ export function useTimeTracker() {
     setRunning(null);
   }, []);
 
+  // IDLE DETECTION (disabled) — see ./useIdleDetection.ts
+  // /**
+  //  * Cuts the running timer at `cutoff`, files the work up to that point, and
+  //  * either restarts at `resumeAt` or leaves the tracker idle.
+  //  *
+  //  * This is how idle time is excluded. The alternative — sliding `startedAt`
+  //  * forward by the idle duration — keeps one row and the right total, but the
+  //  * row then claims to have started at a time nobody was working, and a second
+  //  * exclusion drifts it further. Splitting keeps every timestamp true; the cost
+  //  * is one extra row, which is the honest shape of what happened.
+  //  */
+  // const splitRunning = useCallback(
+  //   (cutoff: number, resumeAt: number | null) => {
+  //     if (!running) return;
+  //     const end = Math.max(running.startedAt, cutoff);
+  //
+  //     /* Nothing worth filing when the timer had barely started before the
+  //        machine went idle — the whole span was the idle period. */
+  //     if (end - running.startedAt >= MINUTE) {
+  //       setEntries((rows) => [
+  //         ...rows,
+  //         {
+  //           id: createId(),
+  //           description: running.description,
+  //           projectId: running.projectId,
+  //           tags: running.tags,
+  //           billable: running.billable,
+  //           start: running.startedAt,
+  //           end,
+  //         },
+  //       ]);
+  //     }
+  //
+  //     if (resumeAt === null) {
+  //       writeRunning(null);
+  //       setRunning(null);
+  //       setDraftState(EMPTY_DRAFT);
+  //       return;
+  //     }
+  //
+  //     const next: RunningEntry = { ...running, startedAt: resumeAt };
+  //     writeRunning(next);
+  //     setRunning(next);
+  //   },
+  //   [running],
+  // );
+
   /** Files an entry directly from the manual composer's start and end times. */
   const addManual = useCallback(
     (span: { start: number; end: number }) => {
@@ -269,6 +316,8 @@ export function useTimeTracker() {
     start,
     stop,
     discard,
+    // IDLE DETECTION (disabled)
+    // splitRunning,
     addManual,
     updateEntry,
     setEntryDuration,

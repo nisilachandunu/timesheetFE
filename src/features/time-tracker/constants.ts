@@ -3,6 +3,24 @@ import type { TrackerProject } from "./types";
 /** The running timer survives a reload — see `useTimeTracker`. */
 export const RUNNING_STORAGE_KEY = "timesheetos:tracker-running";
 
+// IDLE DETECTION (disabled) — see ./hooks/useIdleDetection.ts
+// /**
+//  * How long the machine must be idle before a running timer is questioned.
+//  *
+//  * The Idle Detection API's own floor is 60s, so this cannot go below a minute
+//  * however short you want it.
+//  */
+// export const IDLE_THRESHOLD_MS = 2 * 60 * 1000;
+
+/**
+ * Held here because the skeleton and the loaded board render the page header
+ * separately — see TimeTrackerScreen — and the two must not drift apart.
+ */
+export const TRACKER_PAGE = {
+  title: "Time Tracker",
+  description: "Run a timer as you work, or fill in the times by hand.",
+} as const;
+
 /* ==========================================================================
    Mock data
    Replace with the API response once the backend exists — the list reads only
