@@ -1,5 +1,5 @@
 import { MONTHS, WEEKDAYS, isSameDay, startOfDay, toISODate, weekdayIndex } from "@/lib/date";
-import type { DayGroup, TimeEntry } from "./types";
+import type { DayGroup, TimeEntry, WorkedTask } from "./types";
 
 export const SECOND = 1000;
 export const MINUTE = 60 * SECOND;
@@ -167,4 +167,51 @@ export function groupByDay(entries: TimeEntry[]): DayGroup[] {
     group.entries.sort((a, b) => b.start - a.start);
   }
   return ordered;
+}
+
+/**
+ * Identifies a task by what it was booked as, so repeats of the same work
+ * group together regardless of which entry logged them. Case-insensitive: "Bug
+ * triage" and "bug triage" are the same task typed twice, not two tasks.
+ */
+export function taskKey(description: string, projectId?: string): string {
+  return `${description.trim().toLowerCase()}::${projectId ?? ""}`;
+}
+
+/**
+ * Rolls entries up into the distinct tasks they belong to, most time logged
+ * first. Empty descriptions are excluded — there is nothing there worth
+ * starring or restarting by name.
+ */
+export function summariseTasks(entries: TimeEntry[]): WorkedTask[] {
+  const byKey = new Map<string, WorkedTask>();
+  /* Tracked alongside `byKey` rather than on `WorkedTask` itself — it decides
+     which entry a favourite restarts from, but is not part of what a task is. */
+  const latestStart = new Map<string, number>();
+
+  for (const entry of entries) {
+    const description = entry.description.trim();
+    if (!description) continue;
+
+    const key = taskKey(description, entry.projectId);
+    const duration = entryDuration(entry);
+    const existing = byKey.get(key);
+
+    if (existing && entry.start <= (latestStart.get(key) ?? -Infinity)) {
+      existing.total += duration;
+      continue;
+    }
+
+    byKey.set(key, {
+      key,
+      description,
+      projectId: entry.projectId,
+      tags: entry.tags,
+      billable: entry.billable,
+      total: (existing?.total ?? 0) + duration,
+    });
+    latestStart.set(key, entry.start);
+  }
+
+  return [...byKey.values()].sort((a, b) => b.total - a.total);
 }

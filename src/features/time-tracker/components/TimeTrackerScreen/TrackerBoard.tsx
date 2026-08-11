@@ -4,6 +4,7 @@ import { PageHeader } from "@/features/dashboard";
 import { TRACKER_PAGE } from "../../constants";
 import { useTimeTracker } from "../../hooks";
 import { EntryList } from "../EntryList";
+import { FavouritesBar } from "../FavouritesBar";
 import { TimerBar } from "../TimerBar";
 
 // IDLE DETECTION (disabled) — see ../../hooks/useIdleDetection.ts
@@ -98,15 +99,23 @@ export function TrackerBoard({ today }: TrackerBoardProps) {
         onAddManual={tracker.addManual}
       />
 
+      <FavouritesBar
+        tasks={tracker.favouriteTasks}
+        onStart={tracker.startTask}
+        onToggleFavourite={tracker.toggleFavourite}
+      />
+
       <EntryList
         days={tracker.days}
         weekTotal={tracker.weekTotal}
         today={today}
+        favourites={tracker.favourites}
         onChangeEntry={tracker.updateEntry}
         onSetDuration={tracker.setEntryDuration}
         onContinue={tracker.continueEntry}
         onDuplicate={tracker.duplicateEntry}
         onDelete={tracker.removeEntry}
+        onToggleFavourite={tracker.toggleFavourite}
       />
 
       {/* IDLE DETECTION (disabled) */}

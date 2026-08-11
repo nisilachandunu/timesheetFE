@@ -2,9 +2,9 @@
 
 import { useCallback, useMemo, useState } from "react";
 import { startOfDay, startOfWeek } from "@/lib/date";
-import { RUNNING_STORAGE_KEY, SEED_ENTRIES } from "../constants";
-import type { EntryDraft, RunningEntry, TimeEntry, TrackerMode } from "../types";
-import { HOUR, MINUTE, groupByDay, totalDuration } from "../utils";
+import { FAVOURITES_STORAGE_KEY, MAX_FAVOURITES, RUNNING_STORAGE_KEY, SEED_ENTRIES } from "../constants";
+import type { EntryDraft, RunningEntry, TimeEntry, TrackerMode, WorkedTask } from "../types";
+import { HOUR, MINUTE, groupByDay, summariseTasks, totalDuration } from "../utils";
 
 /** A single entry longer than a day is a slip, not a shift. */
 export const MAX_ENTRY_MS = 24 * HOUR;
@@ -78,6 +78,27 @@ function writeRunning(running: RunningEntry | null) {
   }
 }
 
+function readFavourites(): Set<string> {
+  try {
+    const raw = window.localStorage.getItem(FAVOURITES_STORAGE_KEY);
+    if (!raw) return new Set();
+    const parsed: unknown = JSON.parse(raw);
+    if (!Array.isArray(parsed)) return new Set();
+    return new Set(parsed.filter((key): key is string => typeof key === "string"));
+  } catch {
+    return new Set();
+  }
+}
+
+function writeFavourites(favourites: Set<string>) {
+  try {
+    window.localStorage.setItem(FAVOURITES_STORAGE_KEY, JSON.stringify([...favourites]));
+  } catch {
+    // Persisting is best-effort; the starred state still holds for this session.
+    void 0;
+  }
+}
+
 /**
  * Normalises a span so it always moves forward in time. An end before its start
  * means the work crossed midnight — the honest reading of "10 PM to 2 AM" — so
@@ -107,6 +128,7 @@ export function useTimeTracker() {
   const [running, setRunning] = useState<RunningEntry | null>(readRunning);
   const [draft, setDraftState] = useState<EntryDraft>(EMPTY_DRAFT);
   const [mode, setMode] = useState<TrackerMode>("timer");
+  const [favourites, setFavourites] = useState<Set<string>>(readFavourites);
 
   /* The composer edits the running timer once one exists, so typing a
      description into a live timer is not silently discarded on stop. */
@@ -277,26 +299,62 @@ export function useTimeTracker() {
     setEntries((rows) => rows.filter((row) => row.id !== id));
   }, []);
 
-  /** Starts a fresh timer carrying an existing entry's description and tags. */
-  const continueEntry = useCallback(
-    (id: string) => {
-      const source = entries.find((row) => row.id === id);
-      if (!source) return;
+  /**
+   * Starts a fresh timer carrying a task's description, project and tags —
+   * the shared landing point for "Continue" on a past entry and for starting
+   * a favourite, which restart the same kind of thing from different lists.
+   */
+  const startTask = useCallback(
+    (task: { description: string; projectId?: string; tags: string[]; billable: boolean }) => {
       const next: RunningEntry = {
-        description: source.description,
-        projectId: source.projectId,
-        tags: source.tags,
-        billable: source.billable,
+        description: task.description,
+        projectId: task.projectId,
+        tags: task.tags,
+        billable: task.billable,
         startedAt: Date.now(),
       };
       writeRunning(next);
       setRunning(next);
       setMode("timer");
     },
-    [entries],
+    [],
   );
 
+  /** Starts a fresh timer carrying an existing entry's description and tags. */
+  const continueEntry = useCallback(
+    (id: string) => {
+      const source = entries.find((row) => row.id === id);
+      if (!source) return;
+      startTask(source);
+    },
+    [entries, startTask],
+  );
+
+  /**
+   * Toggles whether a task (identified by `taskKey`) is starred. Favourites
+   * are kept as a set of keys rather than copies of the task, so a favourite
+   * always reflects the task's current total and latest tags — starring
+   * doesn't fork a second, staler record of the same work.
+   */
+  const toggleFavourite = useCallback((key: string) => {
+    setFavourites((current) => {
+      const next = new Set(current);
+      if (next.has(key)) next.delete(key);
+      else next.add(key);
+      writeFavourites(next);
+      return next;
+    });
+  }, []);
+
   const days = useMemo(() => groupByDay(entries), [entries]);
+
+  const tasks = useMemo(() => summariseTasks(entries), [entries]);
+
+  /** Starred tasks, most time logged first — what the favourites bar renders. */
+  const favouriteTasks = useMemo<WorkedTask[]>(
+    () => tasks.filter((task) => favourites.has(task.key)).slice(0, MAX_FAVOURITES),
+    [tasks, favourites],
+  );
 
   /** Logged since Monday, excluding whatever is still running. */
   const weekTotal = useMemo(() => {
@@ -324,5 +382,9 @@ export function useTimeTracker() {
     duplicateEntry,
     removeEntry,
     continueEntry,
+    startTask,
+    favourites,
+    favouriteTasks,
+    toggleFavourite,
   };
 }

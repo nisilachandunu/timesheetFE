@@ -13,11 +13,14 @@ import { cn } from "@/lib/cn";
 
 export interface EntryRowProps {
   entry: TimeEntry;
+  /** Whether this entry's task (its description + project) is starred. */
+  isFavourite: boolean;
   onChange: (patch: Partial<Omit<TimeEntry, "id">>) => void;
   onSetDuration: (ms: number) => void;
   onContinue: () => void;
   onDuplicate: () => void;
   onDelete: () => void;
+  onToggleFavourite: () => void;
 }
 
 /**
@@ -28,11 +31,13 @@ export interface EntryRowProps {
  */
 export function EntryRow({
   entry,
+  isFavourite,
   onChange,
   onSetDuration,
   onContinue,
   onDuplicate,
   onDelete,
+  onToggleFavourite,
 }: EntryRowProps) {
   /* The duration field is held as text while it is being typed: "2:" is not a
      duration yet, and reformatting mid-keystroke would fight the user. */
@@ -131,6 +136,30 @@ export function EntryRow({
           }
         }}
       />
+
+      <button
+        type="button"
+        className={cn(
+          "inline-flex items-center justify-center w-8 h-8 shrink-0",
+          "rounded-[8px]",
+          "transition-[background-color,color] duration-fast ease-[ease]",
+          "hover:bg-accent-tint",
+          isFavourite
+            ? "text-accent-text opacity-100"
+            : "text-outline opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 hover:text-accent-text",
+        )}
+        disabled={!entry.description.trim()}
+        onClick={onToggleFavourite}
+        aria-pressed={isFavourite}
+        aria-label={
+          isFavourite
+            ? `Remove ${entry.description || "this entry"} from favourites`
+            : `Add ${entry.description || "this entry"} to favourites`
+        }
+        title={isFavourite ? "Unstar" : "Star"}
+      >
+        <Icon name="star" size={18} filled={isFavourite} />
+      </button>
 
       <button
         type="button"

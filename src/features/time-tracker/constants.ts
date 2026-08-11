@@ -3,6 +3,12 @@ import type { TrackerProject } from "./types";
 /** The running timer survives a reload — see `useTimeTracker`. */
 export const RUNNING_STORAGE_KEY = "timesheetos:tracker-running";
 
+/** Starred task keys survive a reload too — see `useTimeTracker`. */
+export const FAVOURITES_STORAGE_KEY = "timesheetos:tracker-favourites";
+
+/** How many starred tasks the favourites bar shows before the rest scroll. */
+export const MAX_FAVOURITES = 12;
+
 // IDLE DETECTION (disabled) — see ./hooks/useIdleDetection.ts
 // /**
 //  * How long the machine must be idle before a running timer is questioned.

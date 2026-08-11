@@ -75,3 +75,21 @@ export interface DayGroup {
   /** Sum of the group's entry durations, in milliseconds. */
   total: number;
 }
+
+/**
+ * A distinct piece of work, rolled up from every entry logged against the
+ * same description and project. This is what a favourite stars and what a
+ * "most worked" ranking sorts by — an entry is one span of it, a task is the
+ * work itself.
+ */
+export interface WorkedTask {
+  /** Identifies the task regardless of which entry logged it — see `taskKey`. */
+  key: string;
+  description: string;
+  projectId?: string;
+  /** Carried from the most recently logged entry, as the template a restart uses. */
+  tags: string[];
+  billable: boolean;
+  /** Summed across every entry for this task, in milliseconds. */
+  total: number;
+}

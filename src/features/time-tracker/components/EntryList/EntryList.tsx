@@ -2,7 +2,7 @@
 
 import { Icon } from "@/components/ui";
 import type { DayGroup, TimeEntry } from "../../types";
-import { formatDayLabel, formatDuration } from "../../utils";
+import { formatDayLabel, formatDuration, taskKey } from "../../utils";
 import { EntryRow } from "../EntryRow";
 import { cn } from "@/lib/cn";
 
@@ -12,11 +12,14 @@ export interface EntryListProps {
   weekTotal: number;
   /** Today, for the "Today" / "Yesterday" group labels. */
   today: Date;
+  /** Starred task keys — see `taskKey`. */
+  favourites: Set<string>;
   onChangeEntry: (id: string, patch: Partial<Omit<TimeEntry, "id">>) => void;
   onSetDuration: (id: string, ms: number) => void;
   onContinue: (id: string) => void;
   onDuplicate: (id: string) => void;
   onDelete: (id: string) => void;
+  onToggleFavourite: (key: string) => void;
 }
 
 const BAND_LABEL = "text-[0.6875rem] font-bold tracking-[0.08em] uppercase";
@@ -33,11 +36,13 @@ export function EntryList({
   days,
   weekTotal,
   today,
+  favourites,
   onChangeEntry,
   onSetDuration,
   onContinue,
   onDuplicate,
   onDelete,
+  onToggleFavourite,
 }: EntryListProps) {
   return (
     <div
@@ -98,11 +103,15 @@ export function EntryList({
                   <EntryRow
                     key={entry.id}
                     entry={entry}
+                    isFavourite={favourites.has(taskKey(entry.description, entry.projectId))}
                     onChange={(patch) => onChangeEntry(entry.id, patch)}
                     onSetDuration={(ms) => onSetDuration(entry.id, ms)}
                     onContinue={() => onContinue(entry.id)}
                     onDuplicate={() => onDuplicate(entry.id)}
                     onDelete={() => onDelete(entry.id)}
+                    onToggleFavourite={() =>
+                      onToggleFavourite(taskKey(entry.description, entry.projectId))
+                    }
                   />
                 ))}
               </div>
